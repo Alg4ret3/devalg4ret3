@@ -3,13 +3,13 @@
 
 :root {
   /* Paleta Monocromática (Gris) */
-  --brand-1: #F8F9FA;
-  --brand-2: #E9ECEF;
-  --brand-3: #DEE2E6;
-  --brand-4: #CED4DA;
-  --brand-5: #ADB5BD;
-  --brand-6: #6C757D;
-  --brand-7: #495057;
+  --brand-1: #ffffff;
+  --brand-2: #F8F9FA;
+  --brand-3: #E9ECEF;
+  --brand-4: #DEE2E6;
+  --brand-5: #CED4DA;
+  --brand-6: #ADB5BD;
+  --brand-7: #6C757D;
   --brand-8: #343A40;
   --brand-9: #212529;
 
@@ -21,12 +21,20 @@
 }
 
 html, body, main {
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
   margin: 0;
   padding: 0;
-  overflow-y: auto;
   overflow-x: hidden;
+}
+
+body {
+  overflow-y: auto;
+}
+
+.no-scroll {
+  overflow: hidden !important;
+  height: 100vh;
 }
 
 body {

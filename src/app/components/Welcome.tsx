@@ -6,7 +6,7 @@ import { Flip } from "gsap/Flip";
 
 gsap.registerPlugin(Flip);
 
-export default function Welcome() {
+export default function Welcome({ onAnimationComplete }: { onAnimationComplete: () => void }) {
   const [displayName, setDisplayName] = useState("ALG4RET3");
 
   useEffect(() => {
@@ -65,6 +65,9 @@ export default function Welcome() {
           duration: 1,
           delay: 0.5,
           ease: "power2.out",
+          onComplete: () => {
+            if (onAnimationComplete) onAnimationComplete();
+          }
         });
       }
     }
@@ -74,7 +77,7 @@ export default function Welcome() {
       timer.kill();
       gsap.killTweensOf(nextState);
     };
-  }, [displayName]); // Reinicia la animación si el nombre cambia (opcional)
+  }, [displayName, onAnimationComplete]); // Reinicia la animación si el nombre cambia (opcional)
 
   return (
     <section className="welcome" id="welcome">
