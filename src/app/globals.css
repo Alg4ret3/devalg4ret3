@@ -1,26 +1,172 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Montserrat:wght@700;800;900&display=swap');
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --gray-50:  #F8F9FA;
+  --gray-100: #E9ECEF;
+  --gray-200: #DEE2E6;
+  --gray-300: #CED4DA;
+  --gray-400: #ADB5BD;
+  --gray-500: #6C757D;
+  --gray-600: #495057;
+  --gray-700: #343A40;
+  --gray-800: #212529;
+
+  --font-sans: "Inter", sans-serif;
+  --font-display: "Montserrat", sans-serif;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html, body, main {
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans);
+  background-color: var(--gray-50);
 }
+
+.welcome {
+  width: 100%;
+  height: 100%;
+  background-color: var(--gray-50);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative; /* Necesario para GSAP Flip absolute: true */
+}
+
+/* Contenedor principal */
+.flip-container {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  max-width: none;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  position: relative; /* Necesario para GSAP Flip absolute: true */
+}
+
+.flip-container.plain {
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.flip-container.grid,
+.flip-container.columns {
+  align-content: stretch;
+  align-items: stretch;
+  flex-wrap: wrap;
+}
+
+/* Letras */
+.flip-container.final {
+  flex-wrap: wrap;
+  justify-content: center;
+  align-content: center;
+  gap: 20px 0; /* Solo espacio vertical (entre líneas), 0px entre letras */
+}
+
+/* Eliminar espacios entre bloques de color */
+.letter {
+  text-align: center;
+  font-size: 10vmax;
+  font-family: var(--font-display);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2vmax 1vmax; /* Agregamos aire dentro de los bloques sin separarlos */
+  margin-right: -1px; /* Soluciona el problema de los espacios de 1px entre bloques por sub-píxeles */
+  color: var(--gray-800);
+}
+
+.flip-container.grid .letter {
+  flex-basis: 25%;
+  height: 50%;
+}
+
+.flip-container.columns .letter {
+  flex: 1;
+  height: 100%;
+}
+
+.flip-container.final .mobile-break {
+  display: block;
+  width: 100%;
+  height: 0;
+}
+
+.mobile-break {
+  display: none;
+}
+
+/* Responsividad Móvil */
+@media (max-width: 768px) {
+  .letter {
+    font-size: 15vw;
+  }
+
+  .flip-container.grid .letter {
+    flex-basis: 50%; /* 2 columnas */
+    height: 33.333%; /* 3 filas para SERGIO (6 letras) */
+  }
+
+  .flip-container.columns {
+    flex-direction: column;
+  }
+
+  .flip-container.columns .letter {
+    flex: 1;
+    width: 100%;
+    height: auto; /* Se reparte el alto gracias a flex: 1 */
+  }
+
+  .info-text {
+    font-size: 4vw;
+  }
+}
+
+/* Texto adicional */
+.info-text {
+  font-size: 1.5rem; /* Tamaño más profesional y sutil */
+  font-family: var(--font-sans); /* Usamos Inter para el cargo, queda mejor */
+  color: var(--gray-500);
+  display: none;
+  padding: 5px 10px;
+  white-space: nowrap;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+.flip-container.final .info-text {
+  display: block;
+}
+
+/* Colores de las letras (Escala de grises) */
+.L1 { background: var(--gray-100); }
+.L2 { background: var(--gray-200); }
+.L3 { background: var(--gray-300); }
+.L4 { background: var(--gray-400); }
+.L5 { background: var(--gray-500); }
+.L6 { background: var(--gray-600); }
+.L7 { background: var(--gray-700); color: var(--gray-50); }
+.L8 { background: var(--gray-800); color: var(--gray-50); }
+
+/* Layout plain */
+.flip-container.plain .letter {
+  background: transparent;
+  color: var(--gray-800);
+  padding: 0;
+  flex-basis: auto;
+  height: auto;
+}
+
+/* Fin de estilos Welcome */
