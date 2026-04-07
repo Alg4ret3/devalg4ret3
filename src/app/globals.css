@@ -2,15 +2,19 @@
 @import "tailwindcss";
 
 :root {
-  /* Paleta de Marca (Variables Generales) */
-  --brand-1: #8ECAE6;
-  --brand-2: #219EBC;
-  --brand-3: #023047;
-  --brand-4: #FFB703;
-  --brand-5: #FB8500;
+  /* Paleta Monocromática (Gris) */
+  --brand-1: #F8F9FA;
+  --brand-2: #E9ECEF;
+  --brand-3: #DEE2E6;
+  --brand-4: #CED4DA;
+  --brand-5: #ADB5BD;
+  --brand-6: #6C757D;
+  --brand-7: #495057;
+  --brand-8: #343A40;
+  --brand-9: #212529;
 
   /* Color de Fondo */
-  --bg-main: #ffffff;
+  --bg-main: var(--brand-1);
 
   --font-sans: "Inter", sans-serif;
   --font-display: "Montserrat", sans-serif;
@@ -21,7 +25,8 @@ html, body, main {
   height: 100vh;
   margin: 0;
   padding: 0;
-  overflow: hidden;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 
 body {
@@ -151,23 +156,94 @@ body {
   display: block;
 }
 
-/* Asignación de la nueva paleta generada */
-.L1 { background: var(--brand-1); }
-.L2 { background: var(--brand-2); }
-.L3 { background: var(--brand-3); color: white; }
-.L4 { background: var(--brand-4); }
-.L5 { background: var(--brand-5); }
-.L6 { background: var(--brand-1); }
-.L7 { background: var(--brand-2); }
-.L8 { background: var(--brand-3); color: white; }
+/* Asignación de la nueva paleta generada (Escritorio) */
+.L1 { background: var(--brand-2); color: var(--brand-9); }
+.L2 { background: var(--brand-3); color: var(--brand-9); }
+.L3 { background: var(--brand-4); color: var(--brand-9); }
+.L4 { background: var(--brand-5); color: var(--brand-9); }
+.L5 { background: var(--brand-6); color: white; }
+.L6 { background: var(--brand-7); color: white; }
+.L7 { background: var(--brand-8); color: white; }
+.L8 { background: var(--brand-9); color: white; }
+
+/* Sobreescritura de colores para Mobile (AG4RT3 - 6 letras) */
+@media (max-width: 768px) {
+  .L1 { background: var(--brand-3); color: var(--brand-9); }
+  .L2 { background: var(--brand-4); color: var(--brand-9); }
+  .L3 { background: var(--brand-5); color: var(--brand-9); }
+  .L4 { background: var(--brand-7); color: white; }
+  .L5 { background: var(--brand-8); color: white; }
+  .L6 { background: var(--brand-9); color: white; }
+}
 
 /* Layout plain */
 .flip-container.plain .letter {
   background: transparent;
-  color: var(--brand-3);
+  color: var(--brand-9);
   padding: 0;
   flex-basis: auto;
   height: auto;
 }
 
+/* Texto adicional */
+.info-text {
+  font-size: 1.5rem;
+  font-family: var(--font-sans);
+  color: var(--brand-7);
+  display: none;
+  padding: 5px 10px;
+  white-space: nowrap;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-weight: 500;
+  opacity: 0.8;
+}
+
+.flip-container.final .info-text {
+  display: block;
+}
+
 /* Fin de estilos Welcome */
+.scroll-indicator {
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  color: var(--brand-5);
+  font-family: var(--font-sans);
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  font-size: 0.7rem;
+  pointer-events: none;
+  opacity: 0.6;
+  text-align: center;
+}
+
+.scroll-indicator p {
+  margin: 0;
+}
+
+.scroll-arrow {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: bounce-arrow 2s infinite ease-in-out;
+}
+
+@keyframes bounce-arrow {
+  0%, 100% {
+    transform: translateY(0);
+    opacity: 0.4;
+  }
+  50% {
+    transform: translateY(10px);
+    opacity: 1;
+  }
+}
+
+

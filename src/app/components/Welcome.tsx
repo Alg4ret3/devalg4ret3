@@ -22,6 +22,7 @@ export default function Welcome() {
     const layouts = ["final", "plain", "columns", "grid"];
     const container = document.querySelector(".flip-container")!;
     let curLayout = 0;
+    let stopAfterNextFinal = false;
 
     function nextState() {
       const state = Flip.getState(".letter, .info-text", {
@@ -31,6 +32,11 @@ export default function Welcome() {
 
       container.classList.remove(layouts[curLayout]);
       curLayout = (curLayout + 1) % layouts.length;
+
+      if (curLayout === layouts.length - 1) {
+        stopAfterNextFinal = true;
+      }
+
       container.classList.add(layouts[curLayout]);
 
       Flip.from(state, {
@@ -49,7 +55,19 @@ export default function Welcome() {
         onLeave: (elements) => gsap.to(elements, { opacity: 0 }),
       });
 
-      gsap.delayedCall(curLayout === 0 ? 3.5 : 1.5, nextState);
+      if (!(stopAfterNextFinal && curLayout === 0)) {
+        gsap.delayedCall(curLayout === 0 ? 3.5 : 1.5, nextState);
+      } else {
+        // Revelar indicador de scroll
+        gsap.to(".scroll-indicator", {
+          opacity: 1,
+          y: 0,
+          xPercent: -50,
+          duration: 1,
+          delay: 0.5,
+          ease: "power2.out",
+        });
+      }
     }
 
     const timer = gsap.delayedCall(1, nextState);
@@ -69,6 +87,14 @@ export default function Welcome() {
         ))}
         <div className="mobile-break"></div>
         <div className="info-text">Computer Engineer</div>
+      </div>
+      <div className="scroll-indicator" style={{ opacity: 0, transform: 'translateX(-50%) translateY(20px)' }}>
+        <p>Desplazar hacia abajo</p>
+        <div className="scroll-arrow">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M7 13l5 5 5-5M7 6l5 5 5-5" />
+          </svg>
+        </div>
       </div>
     </section>
   );
