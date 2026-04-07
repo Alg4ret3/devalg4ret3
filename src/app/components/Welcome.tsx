@@ -11,7 +11,7 @@ export default function Welcome() {
 
   useEffect(() => {
     const handleResize = () => {
-      setDisplayName(window.innerWidth <= 768 ? "SERGIO" : "ALG4RET3");
+      setDisplayName(window.innerWidth <= 768 ? "AG4RT3" : "ALG4RET3");
     };
     handleResize();
     window.addEventListener("resize", handleResize);
@@ -68,7 +68,7 @@ export default function Welcome() {
           </div>
         ))}
         <div className="mobile-break"></div>
-        <div className="info-text">Software Engineer</div>
+        <div className="info-text">Computer Engineer</div>
       </div>
     </section>
   );

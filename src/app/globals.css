@@ -2,15 +2,15 @@
 @import "tailwindcss";
 
 :root {
-  --gray-50:  #F8F9FA;
-  --gray-100: #E9ECEF;
-  --gray-200: #DEE2E6;
-  --gray-300: #CED4DA;
-  --gray-400: #ADB5BD;
-  --gray-500: #6C757D;
-  --gray-600: #495057;
-  --gray-700: #343A40;
-  --gray-800: #212529;
+  /* Paleta de Marca (Variables Generales) */
+  --brand-1: #8ECAE6;
+  --brand-2: #219EBC;
+  --brand-3: #023047;
+  --brand-4: #FFB703;
+  --brand-5: #FB8500;
+
+  /* Color de Fondo */
+  --bg-main: #ffffff;
 
   --font-sans: "Inter", sans-serif;
   --font-display: "Montserrat", sans-serif;
@@ -26,13 +26,13 @@ html, body, main {
 
 body {
   font-family: var(--font-sans);
-  background-color: var(--gray-50);
+  background-color: var(--bg-main);
 }
 
 .welcome {
   width: 100%;
   height: 100%;
-  background-color: var(--gray-50);
+  background-color: var(--bg-main);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -72,7 +72,17 @@ body {
   gap: 20px 0; /* Solo espacio vertical (entre líneas), 0px entre letras */
 }
 
-/* Eliminar espacios entre bloques de color */
+.flip-container.final .mobile-break {
+  display: block;
+  width: 100%;
+  height: 0;
+}
+
+.mobile-break {
+  display: none;
+}
+
+/* Letras */
 .letter {
   text-align: center;
   font-size: 10vmax;
@@ -84,7 +94,7 @@ body {
   justify-content: center;
   padding: 2vmax 1vmax; /* Agregamos aire dentro de los bloques sin separarlos */
   margin-right: -1px; /* Soluciona el problema de los espacios de 1px entre bloques por sub-píxeles */
-  color: var(--gray-800);
+  color: var(--brand-3); /* Color base oscuro para contraste */
 }
 
 .flip-container.grid .letter {
@@ -95,16 +105,6 @@ body {
 .flip-container.columns .letter {
   flex: 1;
   height: 100%;
-}
-
-.flip-container.final .mobile-break {
-  display: block;
-  width: 100%;
-  height: 0;
-}
-
-.mobile-break {
-  display: none;
 }
 
 /* Responsividad Móvil */
@@ -137,33 +137,34 @@ body {
 .info-text {
   font-size: 1.5rem; /* Tamaño más profesional y sutil */
   font-family: var(--font-sans); /* Usamos Inter para el cargo, queda mejor */
-  color: var(--gray-500);
+  color: var(--brand-3);
   display: none;
   padding: 5px 10px;
   white-space: nowrap;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   font-weight: 500;
+  opacity: 0.7;
 }
 
 .flip-container.final .info-text {
   display: block;
 }
 
-/* Colores de las letras (Escala de grises) */
-.L1 { background: var(--gray-100); }
-.L2 { background: var(--gray-200); }
-.L3 { background: var(--gray-300); }
-.L4 { background: var(--gray-400); }
-.L5 { background: var(--gray-500); }
-.L6 { background: var(--gray-600); }
-.L7 { background: var(--gray-700); color: var(--gray-50); }
-.L8 { background: var(--gray-800); color: var(--gray-50); }
+/* Asignación de la nueva paleta generada */
+.L1 { background: var(--brand-1); }
+.L2 { background: var(--brand-2); }
+.L3 { background: var(--brand-3); color: white; }
+.L4 { background: var(--brand-4); }
+.L5 { background: var(--brand-5); }
+.L6 { background: var(--brand-1); }
+.L7 { background: var(--brand-2); }
+.L8 { background: var(--brand-3); color: white; }
 
 /* Layout plain */
 .flip-container.plain .letter {
   background: transparent;
-  color: var(--gray-800);
+  color: var(--brand-3);
   padding: 0;
   flex-basis: auto;
   height: auto;
