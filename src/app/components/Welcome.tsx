@@ -62,7 +62,6 @@ export default function Welcome() {
         gsap.to(".scroll-indicator", {
           opacity: 1,
           y: 0,
-          xPercent: -50,
           duration: 1,
           delay: 0.5,
           ease: "power2.out",
@@ -88,7 +87,7 @@ export default function Welcome() {
         <div className="mobile-break"></div>
         <div className="info-text">Computer Engineer</div>
       </div>
-      <div className="scroll-indicator" style={{ opacity: 0, transform: 'translateX(-50%) translateY(20px)' }}>
+      <div className="scroll-indicator" style={{ opacity: 0, transform: 'translateY(20px)' }}>
         <p>Desplazar hacia abajo</p>
         <div className="scroll-arrow">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
