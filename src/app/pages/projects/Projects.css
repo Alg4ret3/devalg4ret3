@@ -1,0 +1,110 @@
+.projects-section {
+  width: 100%;
+  padding: 150px 50px;
+  background-color: var(--bg-main);
+  position: relative;
+  z-index: 5;
+}
+
+.projects-header {
+  margin-bottom: 80px;
+  max-width: 1300px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.projects-title {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 5vw, 4rem);
+  font-weight: 800;
+  text-transform: uppercase;
+  color: var(--brand-9);
+  letter-spacing: -0.02em;
+  margin: 0;
+}
+
+.projects-grid {
+  max-width: 1300px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 40px;
+}
+
+.project-card {
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+/* Items asimétricos */
+.project-card.large { grid-column: span 8; height: 500px; }
+.project-card.small { grid-column: span 4; height: 500px; }
+.project-card.medium { grid-column: span 6; height: 400px; }
+.project-card.portrait { grid-column: span 4; height: 600px; }
+.project-card.wide { grid-column: span 8; height: 400px; }
+
+.project-image-wrapper {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background-color: var(--brand-2);
+}
+
+.project-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(100%);
+  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), filter 0.8s ease;
+}
+
+.project-card:hover .project-image {
+  filter: grayscale(0%);
+  transform: scale(1.05);
+}
+
+.project-info {
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.project-name {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--brand-9);
+  margin: 0;
+}
+
+.project-category {
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  color: var(--brand-7);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+@media (max-width: 1024px) {
+  .projects-grid {
+    gap: 20px;
+  }
+  
+  .project-card.large,
+  .project-card.small,
+  .project-card.medium,
+  .project-card.portrait,
+  .project-card.wide {
+    grid-column: span 12;
+    height: 400px;
+  }
+}
+
+@media (max-width: 768px) {
+  .projects-section {
+    padding: 80px 25px;
+  }
+}

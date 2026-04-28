@@ -17,7 +17,7 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Sergio Muñoz — Computer Engineer",
   description:
-    "Portafolio de Sergio Muñoz. Ingeniero Informático enfocado en rendimiento, diseño limpio y código mantenible.",
+    "Portafolio de Sergio Muñoz. Ingeniero Informático.",
 };
 
 export default function RootLayout({
