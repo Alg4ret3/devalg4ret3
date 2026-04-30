@@ -1,81 +1,86 @@
 "use client";
 
-import { useLang, T } from "../../context/LanguageContext";
+import React, { useRef } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useGSAP } from "@gsap/react";
+import { ProjectsMainLayout } from "./organisms/ProjectsMainLayout";
 import "./Projects.css";
 
-const projects = [
+if (typeof window !== "undefined") {
+  gsap.registerPlugin(ScrollTrigger);
+}
+
+const technologies = [
   {
     id: 1,
-    titleEs: "Estructura Minimal",
-    titleEn: "Minimal Structure",
-    categoryEs: "Arquitectura",
-    categoryEn: "Architecture",
-    image: "https://images.pexels.com/photos/1624496/pexels-photo-1624496.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-    size: "large"
+    name: "React",
+    descriptionEs: "Biblioteca líder para interfaces dinámicas.",
+    descriptionEn: "Leading library for dynamic interfaces.",
+    useEs: "La utilizo para crear aplicaciones web rápidas, escalables y con una experiencia de usuario fluida.",
+    useEn: "I use it to create fast, scalable web applications with a seamless user experience.",
   },
   {
     id: 2,
-    titleEs: "Geometría Urbana",
-    titleEn: "Urban Geometry",
-    categoryEs: "Diseño Exterior",
-    categoryEn: "Exterior Design",
-    image: "https://images.pexels.com/photos/323705/pexels-photo-323705.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-    size: "small"
+    name: "GSAP",
+    descriptionEs: "El estándar de oro en animaciones web.",
+    descriptionEn: "The gold standard in web animation.",
+    useEs: "Fundamental para dar vida a los diseños con movimientos complejos y transiciones de alta calidad.",
+    useEn: "Essential for bringing designs to life with complex movements and high-quality transitions.",
   },
   {
     id: 3,
-    titleEs: "Espacio de Luz",
-    titleEn: "Space of Light",
-    categoryEs: "Interiorismo",
-    categoryEn: "Interior Design",
-    image: "https://images.pexels.com/photos/374074/pexels-photo-374074.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-    size: "portrait"
+    name: "Next.js",
+    descriptionEs: "Framework de React para producción.",
+    descriptionEn: "The React framework for production.",
+    useEs: "Lo empleo para optimizar el rendimiento, el SEO y la estructura general de proyectos robustos.",
+    useEn: "I use it to optimize performance, SEO, and the overall structure of robust projects.",
   },
   {
     id: 4,
-    titleEs: "Concepto Visual",
-    titleEn: "Visual Concept",
-    categoryEs: "Arte Digital",
-    categoryEn: "Digital Art",
-    image: "https://images.pexels.com/photos/1216589/pexels-photo-1216589.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-    size: "wide"
+    name: "Three.js",
+    descriptionEs: "Gráficos 3D en el navegador.",
+    descriptionEn: "3D graphics in the browser.",
+    useEs: "Para integrar experiencias inmersivas y elementos tridimensionales interactivos en la web.",
+    useEn: "To integrate immersive experiences and interactive three-dimensional elements into the web.",
   }
 ];
 
 export const ProjectsSection = () => {
-  const { t } = useLang();
+  const sectionRef = useRef<HTMLElement>(null);
+
+  useGSAP(() => {
+    // Solo animamos la barra de progreso
+    gsap.to(".progress-bar-fill", {
+      height: "100%",
+      ease: "none",
+      scrollTrigger: {
+        trigger: ".tech-content",
+        start: "top center",
+        end: "bottom center",
+        scrub: true,
+      }
+    });
+
+    // Parallax simple para los textos de fondo
+    gsap.utils.toArray(".tech-bg-text").forEach((text: any) => {
+      gsap.to(text, {
+        y: -150,
+        scrollTrigger: {
+          trigger: text,
+          start: "top bottom",
+          end: "bottom top",
+          scrub: true
+        }
+      });
+    });
+
+  }, { scope: sectionRef });
 
   return (
-    <section className="projects-section" id="proyectos">
-      <div className="projects-header">
-        <h2 className="projects-title">
-          <T es="Proyectos Seleccionados" en="Selected Projects" />
-        </h2>
-      </div>
-
-      <div className="projects-grid">
-        {projects.map((project) => (
-          <div key={project.id} className={`project-card ${project.size}`}>
-            <div className="project-image-wrapper">
-              <img
-                src={project.image}
-                alt={t(project.titleEs, project.titleEn)}
-                className="project-image"
-                loading="lazy"
-              />
-            </div>
-            <div className="project-info">
-              <h3 className="project-name">
-                <T es={project.titleEs} en={project.titleEn} />
-              </h3>
-              <span className="project-category">
-                <T es={project.categoryEs} en={project.categoryEn} />
-              </span>
-            </div>
-          </div>
-        ))}
-      </div>
-    </section>
+    <ProjectsMainLayout
+      sectionRef={sectionRef}
+      technologies={technologies}
+    />
   );
 };
-

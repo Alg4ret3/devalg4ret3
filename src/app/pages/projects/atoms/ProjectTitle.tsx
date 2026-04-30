@@ -1,0 +1,36 @@
+"use client";
+
+import React, { useEffect, useRef, useState } from "react";
+import { T } from "../../../context/LanguageContext";
+
+export const ProjectTitle = () => {
+  const [inView, setInView] = useState(false);
+  const titleRef = useRef<HTMLHeadingElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setInView(entry.isIntersecting);
+      },
+      {
+        threshold: 0.1,
+        rootMargin: "0px 0px -5% 0px"
+      }
+    );
+
+    if (titleRef.current) {
+      observer.observe(titleRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <h2
+      className={`projects-title ${inView ? "animate-in" : ""}`}
+      ref={titleRef}
+    >
+      <T es="Tecnologías" en="Technologies" />
+    </h2>
+  );
+};
