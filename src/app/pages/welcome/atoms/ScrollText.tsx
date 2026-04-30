@@ -1,5 +1,5 @@
 "use client";
 
-export const ScrollText = ({ text }: { text: string }) => (
+export const ScrollText = ({ text }: { text: React.ReactNode }) => (
   <p>{text}</p>
 );

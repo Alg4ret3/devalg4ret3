@@ -190,20 +190,39 @@
   margin: 0;
 }
 
-.scroll-arrow {
+.scroll-line-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  animation: bounce-arrow 2s infinite ease-in-out;
+  height: 50px;
+  margin-top: 8px;
 }
 
-@keyframes bounce-arrow {
-  0%, 100% {
-    transform: translateY(0);
-    opacity: 0.6;
+.scroll-line {
+  width: 2px;
+  height: 100%;
+  background-color: var(--brand-3, #ccc);
+  position: relative;
+  overflow: hidden;
+  border-radius: 2px;
+}
+
+.scroll-dot {
+  position: absolute;
+  top: -50%;
+  left: 0;
+  width: 100%;
+  height: 40%;
+  background-color: var(--brand-8, #333);
+  border-radius: 2px;
+  animation: scroll-down-anim 1.5s infinite cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+@keyframes scroll-down-anim {
+  0% {
+    top: -50%;
   }
-  50% {
-    transform: translateY(10px);
-    opacity: 1;
+  100% {
+    top: 100%;
   }
 }
