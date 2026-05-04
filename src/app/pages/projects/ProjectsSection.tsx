@@ -63,7 +63,7 @@ export const ProjectsSection = () => {
     });
 
     // Parallax simple para los textos de fondo
-    gsap.utils.toArray(".tech-bg-text").forEach((text: any) => {
+    gsap.utils.toArray<HTMLElement>(".tech-bg-text").forEach((text) => {
       gsap.to(text, {
         y: -150,
         scrollTrigger: {

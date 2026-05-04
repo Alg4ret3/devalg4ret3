@@ -1,0 +1,76 @@
+.whatsapp-float {
+  position: fixed;
+  left: 35px;
+  bottom: 35px;
+  width: 50px;
+  height: 50px;
+  background-color: #000000;
+  color: #fff;
+  border-radius: 50%;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  transition: transform 0.3s ease;
+  /* Pulso ultra sutil: solo una línea fina */
+  box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.1);
+  animation: pulse-minimal 3s infinite;
+}
+
+.whatsapp-float:hover {
+  transform: scale(1.05);
+}
+
+.whatsapp-bubble {
+  position: absolute;
+  bottom: 65px;
+  left: 0;
+  background: white;
+  color: #000;
+  padding: 6px 12px;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  border-radius: 4px; /* Más cuadrado para ser más minimalista */
+  font-family: var(--font-sans, sans-serif);
+  font-size: 0.75rem;
+  font-weight: 600;
+  white-space: nowrap;
+  opacity: 0;
+  transform: scale(0);
+  pointer-events: none;
+}
+
+/* Piquito minimalista */
+.whatsapp-bubble::after {
+  content: "";
+  position: absolute;
+  bottom: -5px;
+  left: 10px;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 5px solid rgba(0, 0, 0, 0.05);
+}
+
+@keyframes pulse-minimal {
+  0% {
+    box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.2);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(0, 0, 0, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+  }
+}
+
+@media (max-width: 768px) {
+  .whatsapp-float {
+    width: 45px;
+    height: 45px;
+    left: 25px;
+    bottom: 25px;
+  }
+  .whatsapp-bubble {
+    bottom: 55px;
+  }
+}

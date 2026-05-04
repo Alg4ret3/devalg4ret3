@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, useContext, useState, useCallback } from "react";
+import { createContext, useContext, useState, useCallback, useEffect } from "react";
 
 type Lang = "ES" | "EN";
 
@@ -18,6 +18,10 @@ const LanguageContext = createContext<LanguageContextValue>({
 
 export function LanguageProvider({ children }: { children: React.ReactNode }) {
   const [lang, setLang] = useState<Lang>("EN");
+
+  useEffect(() => {
+    document.documentElement.lang = lang.toLowerCase();
+  }, [lang]);
 
   const toggleLang = useCallback(() => {
     setLang((prev) => (prev === "ES" ? "EN" : "ES"));

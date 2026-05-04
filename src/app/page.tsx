@@ -1,9 +1,16 @@
 "use client";
 
 import { useState, useCallback, useEffect } from "react";
+import dynamic from "next/dynamic";
 import WelcomePage from "./pages/welcome/WelcomePage";
 import { Navbar } from "./components/navbar/Navbar";
-import { ProjectsSection } from "./pages/projects/ProjectsSection";
+
+// Dynamic imports para optimizar el bundle (Lazy loading de componentes pesados)
+const ProjectsSection = dynamic(() => import("./pages/projects/ProjectsSection").then(mod => mod.ProjectsSection));
+const BackendSection = dynamic(() => import("./pages/backend/BackendSection").then(mod => mod.BackendSection));
+const SectionBridge = dynamic(() => import("./components/SectionBridge").then(mod => mod.SectionBridge));
+const WhatsAppButton = dynamic(() => import("./components/WhatsAppButton").then(mod => mod.WhatsAppButton), { ssr: false });
+
 
 export default function Home() {
   const [isFinished, setIsFinished] = useState(false);
@@ -47,6 +54,9 @@ export default function Home() {
       <Navbar isVisible={isFinished} />
       <WelcomePage onAnimationComplete={handleAnimationComplete} />
       <ProjectsSection />
+      <SectionBridge />
+      <BackendSection />
+      <WhatsAppButton />
     </main>
   );
 }

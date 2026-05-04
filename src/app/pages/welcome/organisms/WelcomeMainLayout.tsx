@@ -5,7 +5,7 @@ import { CargoText } from "../molecules/CargoText";
 import { ScrollIndicator } from "../molecules/ScrollIndicator";
 
 export const WelcomeMainLayout = ({ displayName, isMounted }: { displayName: string; isMounted: boolean }) => (
-  <section className="welcome" id="welcome">
+  <section className="welcome" id="sobre-mi">
     <div className="flip-container plain">
       {isMounted && displayName && <LettersGroup displayName={displayName} />}
       <div className="mobile-break"></div>

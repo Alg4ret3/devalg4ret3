@@ -43,9 +43,9 @@ export const Navbar = ({ isVisible }: NavbarProps) => {
   };
 
   const navLinks = [
-    { href: "#proyectos", es: "Proyectos", en: "Projects" },
+    { href: "#proyectos", es: "Tecnologías", en: "Technologies" },
+    { href: "#backend", es: "Proyectos", en: "Projects" },
     { href: "#sobre-mi", es: "Sobre mí", en: "About me" },
-    { href: "#contacto", es: "Contacto", en: "Contact" },
   ];
 
   return (

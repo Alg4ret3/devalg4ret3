@@ -1,0 +1,94 @@
+.not-found-container {
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #ffffff; /* Fondo blanco puro */
+  color: #000000;
+  position: relative;
+  overflow: hidden;
+}
+
+.error-content {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  max-width: 600px;
+  padding: 0 20px;
+}
+
+.error-glitch {
+  font-family: var(--font-sans, sans-serif);
+  font-size: clamp(8rem, 20vw, 15rem);
+  font-weight: 900;
+  line-height: 1;
+  margin: 0;
+  letter-spacing: -5px;
+  color: #000000;
+  position: relative;
+}
+
+.error-message {
+  font-family: var(--font-sans, sans-serif);
+  font-size: clamp(1.2rem, 3vw, 2rem);
+  font-weight: 600;
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+  color: #000000;
+}
+
+.error-submessage {
+  font-family: var(--font-sans, sans-serif);
+  font-size: clamp(0.9rem, 2vw, 1.1rem);
+  color: #666666;
+  margin-bottom: 3rem;
+  line-height: 1.5;
+}
+
+.error-button {
+  display: inline-block;
+  position: relative;
+  padding: 15px 40px;
+  text-decoration: none;
+  border: 1px solid #000000;
+  border-radius: 0;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.error-button .btn-text {
+  position: relative;
+  z-index: 2;
+  font-family: var(--font-sans, sans-serif);
+  font-weight: 600;
+  font-size: 1rem;
+  color: #000000;
+  transition: color 0.3s ease;
+}
+
+.error-button .btn-bg {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #000000;
+  z-index: 1;
+  transition: top 0.4s cubic-bezier(0.76, 0, 0.24, 1);
+  border-radius: 0;
+}
+
+.error-button:hover .btn-text {
+  color: #ffffff;
+}
+
+.error-button:hover .btn-bg {
+  top: 0;
+}
+
+@media (max-width: 768px) {
+  .error-button {
+    padding: 12px 30px;
+  }
+}

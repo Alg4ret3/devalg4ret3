@@ -16,9 +16,21 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Sergio Muñoz — Computer Engineer",
+  title: "Sergio Muñoz | Computer Engineer & Full Stack Developer",
   description:
-    "Portafolio de Sergio Muñoz. Ingeniero Informático.",
+    "Portfolio of Sergio Muñoz, Computer Engineer specialized in React, Node.js and High Performance Animations.",
+  openGraph: {
+    title: "Sergio Muñoz | Computer Engineer",
+    description: "Portfolio specialized in high-performance web development and AI integration.",
+    url: "https://sergiomunoz.dev",
+    siteName: "Sergio Muñoz Portfolio",
+    locale: "es_ES",
+    type: "website",
+  },
+  robots: {
+    index: true,
+    follow: true,
+  }
 };
 
 export default function RootLayout({
