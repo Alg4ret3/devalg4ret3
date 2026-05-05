@@ -27,13 +27,15 @@ export const TechnologiesFrontendLayout = ({ sectionRef, technologies }: Technol
 
       <div className="tf-content">
         {technologies.map((tech, index) => (
-          <div 
-            key={tech.id} 
+          <div
+            key={tech.id}
             className={`tf-card-wrapper ${index % 2 === 0 ? "tf-align-right" : "tf-align-left"}`}
           >
             {/* El texto de fondo ahora está FUERA de la tarjeta para que no haya solapamiento */}
             <div className="tf-bg-text-container">
-               <span className="tf-bg-text">{tech.name}</span>
+              <span className="tf-bg-text">{tech.name}</span>
+              <span className="tf-bg-text">{tech.name}</span>
+              <span className="tf-bg-text">{tech.name}</span>
             </div>
             <TechCard {...tech} index={index} />
           </div>

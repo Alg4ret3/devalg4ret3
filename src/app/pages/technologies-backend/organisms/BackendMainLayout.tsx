@@ -19,26 +19,28 @@ interface BackendMainLayoutProps {
 }
 
 export const BackendMainLayout = ({ sectionRef, technologies }: BackendMainLayoutProps) => (
-  <section className="tb-section tb-flipped" id="backend" ref={sectionRef}>
+  <section className="tb-section" id="backend" ref={sectionRef}>
     <div className="tb-container">
-      {/* Contenido (Cards) a la izquierda */}
+      {/* Sidebar (Título) arriba para que se vea correctamente en el flujo vertical */}
+      <div className="tb-sidebar">
+        <BackendTitle />
+      </div>
+
+      {/* Contenido (Cards) */}
       <div className="tb-content">
         {technologies.map((tech, index) => (
-          <div 
-            key={tech.id} 
+          <div
+            key={tech.id}
             className={`tb-card-wrapper ${index % 2 === 0 ? "tb-align-left" : "tb-align-right"}`}
           >
             <div className="tb-bg-text-container">
-               <span className="tb-bg-text">{tech.name}</span>
+              <span className="tb-bg-text">{tech.name}</span>
+              <span className="tb-bg-text">{tech.name}</span>
+              <span className="tb-bg-text">{tech.name}</span>
             </div>
             <TechCard {...tech} index={index} />
           </div>
         ))}
-      </div>
-
-      {/* Sidebar (Título) a la derecha */}
-      <div className="tb-sidebar">
-        <BackendTitle />
       </div>
     </div>
   </section>

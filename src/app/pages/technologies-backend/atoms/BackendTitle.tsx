@@ -30,7 +30,7 @@ export const BackendTitle = () => {
       className={`tb-title ${inView ? "tb-animate-in" : ""}`}
       ref={titleRef}
     >
-      <T es="Tecnologías Backend" en="Backend Technologies" />
+      <T es={<>Tecnologías<br/>Backend</>} en={<>Backend<br/>Technologies</>} />
     </h2>
   );
 };

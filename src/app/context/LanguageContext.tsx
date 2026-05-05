@@ -47,7 +47,7 @@ export function useLang() {
  * Animated translation component
  * Uses a unique key to trigger mount animations on language change
  */
-export const T = ({ es, en }: { es: string; en: string }) => {
+export const T = ({ es, en }: { es: React.ReactNode; en: React.ReactNode }) => {
   const { lang } = useLang();
   const text = lang === "ES" ? es : en;
 
