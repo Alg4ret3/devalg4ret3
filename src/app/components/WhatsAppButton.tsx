@@ -20,7 +20,7 @@ export const WhatsAppButton = () => {
   const bubbleRef = useRef<HTMLDivElement>(null);
   const [currentMsgIndex, setCurrentMsgIndex] = useState(0);
   
-  const whatsappUrl = lang === "es" 
+  const whatsappUrl = lang === "ES" 
     ? "https://wa.me/573170098770?text=%C2%A1Hola%21%20Vengo%20de%20tu%20portafolio%20y%20me%20gustar%C3%ADa%20contactarte%20para%20un%20proyecto."
     : "https://wa.me/573170098770?text=Hello%21%20I%27m%20coming%20from%20your%20portfolio%20and%20I%27d%20like%20to%20contact%20you%20for%20a%20project.";
 
