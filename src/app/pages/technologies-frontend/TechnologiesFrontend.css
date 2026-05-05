@@ -106,21 +106,41 @@
 .tf-card {
   width: 100%;
   max-width: 500px;
-  background: #ffffff;
+  background: rgba(255, 255, 255, 0.7); /* Aura Glass effect */
+  backdrop-filter: blur(15px);
   padding: 60px;
-  border-radius: 4px;
-  border: 1px solid rgba(0, 0, 0, 0.05);
-  box-shadow: 0 40px 100px rgba(0, 0, 0, 0.05);
+  border-radius: 20px; /* Smooth, friendly corners */
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.04);
   position: relative;
   z-index: 100;
   opacity: 0;
   filter: blur(15px);
-  transition: opacity 1s ease, filter 1s ease, transform 1.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+  transition: all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.tf-card:hover {
+  transform: scale(1.02) translateY(-10px);
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 40px 100px rgba(0, 0, 0, 0.08);
 }
 
 .tf-card.tf-animate-in {
   opacity: 1;
   filter: blur(0px);
+  transform: translate(0, 0) scale(1) rotate(0deg);
+}
+
+/* Entry variations */
+.tf-card.tf-from-right { transform: translateX(100px); }
+.tf-card.tf-from-left { transform: translateX(-100px); }
+.tf-card.tf-bounce-in { transform: scale(0.5); }
+.tf-card.tf-rotate-zoom { transform: scale(0.7) rotate(5deg); }
+
+.tf-card.tf-animate-in.tf-from-right,
+.tf-card.tf-animate-in.tf-from-left,
+.tf-card.tf-animate-in.tf-bounce-in,
+.tf-card.tf-animate-in.tf-rotate-zoom {
   transform: translate(0, 0) scale(1) rotate(0deg);
 }
 
@@ -168,13 +188,15 @@
 /* --- RESPONSIVE MOBILE (RESTAURADO) --- */
 @media (max-width: 1100px) {
   .tf-section {
-    padding: 60px 10px; /* Reduced padding so title fits */
+    padding: 60px 10px;
+    /* Reduced padding so title fits */
   }
 
   .tf-container {
+    width: 100%;
     display: grid;
     /* RESTAURADO GRID */
-    grid-template-columns: 45px 1fr;
+    grid-template-columns: 45px 1fr; /* Back to 1 line */
     gap: 15px;
     padding: 0;
     align-items: stretch;
@@ -191,27 +213,34 @@
     margin-bottom: 0;
     width: auto;
     pointer-events: all;
-    grid-column: 1; /* Ensure title is in the 45px column */
-    grid-row: 1;    /* Force same row as content */
+    grid-column: 1;
+    /* Ensure title is in the 45px column */
+    grid-row: 1;
+    /* Force same row as content */
   }
 
   .tf-title {
     writing-mode: vertical-rl;
     transform: rotate(180deg);
     font-size: clamp(1.8rem, 7vw, 4rem);
-    opacity: 0.5 !important; /* More visible */
+    opacity: 0.5 !important;
+    /* More visible */
+    color: #212529 !important;
     letter-spacing: 0.1em;
     text-align: left;
     /* Reset alignment for vertical */
   }
 
   .tf-title br {
-    display: none; /* Single line vertical in mobile */
+    display: none;
+    /* Single line vertical in mobile with space */
   }
 
   .tf-content {
-    grid-column: 2; /* Ensure cards are in the 1fr column */
-    grid-row: 1;    /* Force same row as title */
+    grid-column: 2;
+    /* Ensure cards are in the 1fr column */
+    grid-row: 1;
+    /* Force same row as title */
     margin-top: 0;
     gap: 120px;
     padding-right: 20px;
@@ -224,6 +253,7 @@
   .tf-card {
     max-width: 100%;
     padding: 35px 25px;
+    border-radius: 20px;
   }
 
   .tf-bg-text-container {

@@ -14,8 +14,7 @@
   padding: 5px;
   padding-left: 14px;
 
-  background: rgba(255, 255, 255, 0.7);
-  backdrop-filter: blur(12px) saturate(180%);
+  background: rgba(255, 255, 255, 255);
   -webkit-backdrop-filter: blur(12px) saturate(180%);
   border-radius: 100px;
   border: 1px solid rgba(255, 255, 255, 0.3);
@@ -42,49 +41,64 @@
 /* ── Hamburger ── */
 .nb-hamburger {
   display: flex;
-  flex-direction: column;
+  align-items: center;
   justify-content: center;
-  gap: 4px;
-  padding: 10px;
+  padding: 6px;
   background: none;
   border: none;
   cursor: pointer;
   border-radius: 50px;
-  transition: background 0.2s ease;
+  transition: all 0.3s ease;
 }
 
 .nb-hamburger:hover {
   background: rgba(0, 0, 0, 0.05);
 }
 
+.nb-ham-svg {
+  height: 32px;
+  width: 32px;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
 .nb-ham-line {
-  display: block;
-  width: 18px;
-  height: 2px;
-  background: #212529;
-  border-radius: 2px;
-  transform-origin: center;
-  transition:
-    transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
-    opacity 0.2s ease,
-    width 0.3s ease;
+  fill: none;
+  stroke: #212529;
+  stroke-width: 5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  --length: 24;
+  --offset: -38;
+  stroke-dasharray: var(--length) var(--total-length);
+  stroke-dashoffset: var(--offset);
+  transition: all 0.7s cubic-bezier(.645, .045, .355, 1);
 }
 
-.nb-ham-line--mid {
-  width: 12px;
+.line--1,
+.line--3 {
+  --total-length: 126.64183044433594;
 }
 
-.nb-hamburger.nb-open .nb-ham-line:nth-child(1) {
-  transform: translateY(6px) rotate(45deg);
-  width: 18px;
+.line--2 {
+  --total-length: 70;
 }
-.nb-hamburger.nb-open .nb-ham-line--mid {
-  opacity: 0;
-  transform: scaleX(0);
+
+/* OPEN STATE */
+.nb-hamburger.nb-open .nb-ham-svg {
+  transform: rotate(0deg);
+  /* We handle rotation in the paths */
 }
-.nb-hamburger.nb-open .nb-ham-line:nth-child(3) {
-  transform: translateY(-6px) rotate(-45deg);
-  width: 18px;
+
+.nb-hamburger.nb-open .line--1,
+.nb-hamburger.nb-open .line--3 {
+  --offset: -94.1149185097;
+  --length: 22.627416998;
+}
+
+.nb-hamburger.nb-open .line--2 {
+  --offset: -50;
+  --length: 0.1;
+  /* Small value to hide but keep it rendered if needed */
 }
 
 /* ── Language switcher ── */
@@ -204,6 +218,8 @@
   border-radius: 14px;
   transition: all 0.2s ease;
   letter-spacing: 0.01em;
+  width: 100%;
+  text-align: left;
 }
 
 .nb-dropdown-link:hover {

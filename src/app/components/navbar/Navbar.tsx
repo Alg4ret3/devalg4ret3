@@ -8,13 +8,21 @@ interface NavbarProps {
   isVisible: boolean;
 }
 
-const CV_PATH = "/cv.pdf";
+const CV_PATH = "https://drive.google.com/file/d/1CHb3AiV4sojzdn-QUyKOv3hf4ghxXps8/view?usp=sharing";
 
 export const Navbar = ({ isVisible }: NavbarProps) => {
   const { lang, toggleLang, t } = useLang();
   const [menuOpen, setMenuOpen] = useState(false);
+  const [view, setView] = useState<"main" | "tech">("main");
   const [fading, setFading] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
+
+  // Reset view when menu closes
+  useEffect(() => {
+    if (!menuOpen) {
+      setTimeout(() => setView("main"), 300);
+    }
+  }, [menuOpen]);
 
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
@@ -36,17 +44,8 @@ export const Navbar = ({ isVisible }: NavbarProps) => {
   };
 
   const handleDownloadCV = () => {
-    const link = document.createElement("a");
-    link.href = CV_PATH;
-    link.download = t("Sergio_Muñoz_CV.pdf", "Sergio_Munoz_Resume.pdf");
-    link.click();
+    window.open(CV_PATH, "_blank");
   };
-
-  const navLinks = [
-    { href: "#proyectos", es: "Tecnologías", en: "Technologies" },
-    { href: "#backend", es: "Proyectos", en: "Projects" },
-    { href: "#sobre-mi", es: "Sobre mí", en: "About me" },
-  ];
 
   return (
     <nav className={`nb-nav ${isVisible ? "nb-visible" : ""}`} ref={menuRef}>
@@ -57,9 +56,11 @@ export const Navbar = ({ isVisible }: NavbarProps) => {
         onClick={() => setMenuOpen((v) => !v)}
         aria-label="Menú"
       >
-        <span className="nb-ham-line" />
-        <span className="nb-ham-line nb-ham-line--mid" />
-        <span className="nb-ham-line" />
+        <svg className="nb-ham-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+          <path className="nb-ham-line line--1" d="M0 40h62c13 0 6 28-4 18L35 35" />
+          <path className="nb-ham-line line--2" d="M0 50h70" />
+          <path className="nb-ham-line line--3" d="M0 60h62c13 0 6-28-4-18L35 65" />
+        </svg>
       </button>
 
       {/* ── Language switcher ── */}
@@ -85,16 +86,47 @@ export const Navbar = ({ isVisible }: NavbarProps) => {
 
       {/* ── Dropdown ── */}
       <div className={`nb-dropdown ${menuOpen ? "nb-dropdown--open" : ""}`}>
-        {navLinks.map(({ href, es, en }) => (
-          <a
-            key={href}
-            href={href}
-            className="nb-dropdown-link"
-            onClick={() => setMenuOpen(false)}
-          >
-            <T es={es} en={en} />
-          </a>
-        ))}
+        {view === "main" ? (
+          <>
+            <a 
+              href="#welcome" 
+              className="nb-dropdown-link" 
+              onClick={() => {
+                setMenuOpen(false);
+                // Instant jump to top
+                window.scrollTo({ top: 0, behavior: "auto" });
+                const welcomeEl = document.getElementById("welcome");
+                if (welcomeEl) {
+                  welcomeEl.scrollIntoView({ behavior: "auto" });
+                }
+              }}
+            >
+              <T es="Inicio" en="Home" />
+            </a>
+            <button className="nb-dropdown-link" onClick={() => setView("tech")}>
+              <T es="Tecnologías" en="Technologies" />
+            </button>
+            <a href="#proyectos" className="nb-dropdown-link" onClick={() => setMenuOpen(false)}>
+              <T es="Proyectos" en="Projects" />
+            </a>
+            <a href="#sobre-mi" className="nb-dropdown-link" onClick={() => setMenuOpen(false)}>
+              <T es="Sobre mí" en="About me" />
+            </a>
+          </>
+        ) : (
+          <>
+            <button className="nb-dropdown-link nb-back" onClick={() => setView("main")} aria-label={t("Volver", "Back")}>
+              ←
+            </button>
+            <div className="nb-divider"></div>
+            <a href="#frontend" className="nb-dropdown-link" onClick={() => setMenuOpen(false)}>
+              Frontend
+            </a>
+            <a href="#backend" className="nb-dropdown-link" onClick={() => setMenuOpen(false)}>
+              Backend
+            </a>
+          </>
+        )}
       </div>
 
     </nav>

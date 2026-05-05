@@ -4,7 +4,7 @@
   bottom: 35px;
   width: 50px;
   height: 50px;
-  background-color: #000000;
+  background-color: #25D366; /* WhatsApp Green */
   color: #fff;
   border-radius: 50%;
   z-index: 9999;
@@ -13,8 +13,8 @@
   justify-content: center;
   text-decoration: none;
   transition: transform 0.3s ease;
-  /* Pulso ultra sutil: solo una línea fina */
-  box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.1);
+  /* Pulso verde sutil */
+  box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.4);
   animation: wa-pulse-minimal 3s infinite;
 }
 
@@ -53,13 +53,13 @@
 
 @keyframes wa-pulse-minimal {
   0% {
-    box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.2);
+    box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.5);
   }
   70% {
-    box-shadow: 0 0 0 10px rgba(0, 0, 0, 0);
+    box-shadow: 0 0 0 15px rgba(37, 211, 102, 0);
   }
   100% {
-    box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+    box-shadow: 0 0 0 0 rgba(37, 211, 102, 0);
   }
 }
 

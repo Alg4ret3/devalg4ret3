@@ -20,6 +20,10 @@
   --font-display: "Montserrat", sans-serif;
 }
 
+html {
+  scroll-behavior: auto !important;
+}
+
 html,
 body,
 main {
@@ -29,20 +33,16 @@ main {
   padding: 0;
   overflow-x: hidden;
   overflow-y: scroll;
-  /* Forzar la barra siempre */
 }
 
 body {
   overflow-y: auto;
+  font-family: var(--font-sans);
+  background-color: var(--bg-main);
 }
 
 .gl-no-scroll {
-  /* Ya no limitamos la altura para que el navegador vea que hay contenido abajo */
-}
-
-body {
-  font-family: var(--font-sans);
-  background-color: var(--bg-main);
+  /* Mantener estructura sin scroll inicial */
 }
 
 /* ── Language change animation ── */
@@ -63,4 +63,27 @@ body {
   display: inline-block;
   animation: gl-lang-text-in 0.7s cubic-bezier(0.23, 1, 0.32, 1) forwards;
   will-change: transform, opacity, filter;
+}
+
+/* ── Custom Minimalist Scrollbar ── */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 20px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.4);
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(0, 0, 0, 0.2) transparent;
 }
