@@ -6,10 +6,11 @@ import WelcomePage from "./pages/welcome/WelcomePage";
 import { Navbar } from "./components/navbar/Navbar";
 
 // Dynamic imports para optimizar el bundle (Lazy loading de componentes pesados)
-const ProjectsSection = dynamic(() => import("./pages/projects/ProjectsSection").then(mod => mod.ProjectsSection));
-const BackendSection = dynamic(() => import("./pages/backend/BackendSection").then(mod => mod.BackendSection));
-const SectionBridge = dynamic(() => import("./components/SectionBridge").then(mod => mod.SectionBridge));
-const WhatsAppButton = dynamic(() => import("./components/WhatsAppButton").then(mod => mod.WhatsAppButton), { ssr: false });
+const TechnologiesFrontendSection = dynamic(() => import("./pages/technologies-frontend/TechnologiesFrontendSection").then(mod => mod.TechnologiesFrontendSection));
+const ProjectsSection = dynamic(() => import("./pages/project/ProjectsSection").then(mod => mod.ProjectsSection));
+const BackendSection = dynamic(() => import("./pages/technologies-backend/BackendSection").then(mod => mod.BackendSection));
+const SectionBridge = dynamic(() => import("./components/section-bridge/SectionBridge").then(mod => mod.SectionBridge));
+const WhatsAppButton = dynamic(() => import("./components/whatsapp-button/WhatsAppButton").then(mod => mod.WhatsAppButton), { ssr: false });
 
 
 export default function Home() {
@@ -53,9 +54,10 @@ export default function Home() {
     <main className={!isFinished ? "no-scroll" : ""}>
       <Navbar isVisible={isFinished} />
       <WelcomePage onAnimationComplete={handleAnimationComplete} />
-      <ProjectsSection />
+      <TechnologiesFrontendSection />
       <SectionBridge />
       <BackendSection />
+      <ProjectsSection />
       <WhatsAppButton />
     </main>
   );

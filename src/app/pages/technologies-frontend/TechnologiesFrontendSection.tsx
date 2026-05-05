@@ -4,8 +4,8 @@ import React, { useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
-import { ProjectsMainLayout } from "./organisms/ProjectsMainLayout";
-import "./Projects.css";
+import { TechnologiesFrontendLayout } from "./organisms/TechnologiesFrontendLayout";
+import "./TechnologiesFrontend.css";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
@@ -46,7 +46,7 @@ const technologies = [
   }
 ];
 
-export const ProjectsSection = () => {
+export const TechnologiesFrontendSection = () => {
   const sectionRef = useRef<HTMLElement>(null);
 
   useGSAP(() => {
@@ -78,7 +78,7 @@ export const ProjectsSection = () => {
   }, { scope: sectionRef });
 
   return (
-    <ProjectsMainLayout
+    <TechnologiesFrontendLayout
       sectionRef={sectionRef}
       technologies={technologies}
     />

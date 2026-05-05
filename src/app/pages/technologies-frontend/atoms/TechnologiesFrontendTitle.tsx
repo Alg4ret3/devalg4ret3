@@ -3,7 +3,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { T } from "../../../context/LanguageContext";
 
-export const ProjectTitle = () => {
+export const TechnologiesFrontendTitle = () => {
   const [inView, setInView] = useState(false);
   const titleRef = useRef<HTMLHeadingElement>(null);
 
@@ -27,7 +27,7 @@ export const ProjectTitle = () => {
 
   return (
     <h2
-      className={`projects-title ${inView ? "animate-in" : ""}`}
+      className={`technologies-frontend-title ${inView ? "animate-in" : ""}`}
       ref={titleRef}
     >
       <T es="Tecnologías Frontend" en="Frontend Technologies" />

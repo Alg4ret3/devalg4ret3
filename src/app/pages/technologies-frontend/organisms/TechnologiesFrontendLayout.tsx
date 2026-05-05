@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { ProjectTitle } from "../atoms/ProjectTitle";
+import { TechnologiesFrontendTitle } from "../atoms/TechnologiesFrontendTitle";
 import { TechCard } from "../molecules/TechCard";
 
 interface Tech {
@@ -13,13 +13,13 @@ interface Tech {
   useEn: string;
 }
 
-interface ProjectsMainLayoutProps {
+interface TechnologiesFrontendLayoutProps {
   sectionRef: React.RefObject<HTMLElement | null>;
   technologies: Tech[];
 }
 
-export const ProjectsMainLayout = ({ sectionRef, technologies }: ProjectsMainLayoutProps) => (
-  <section className="projects-section" id="proyectos" ref={sectionRef}>
+export const TechnologiesFrontendLayout = ({ sectionRef, technologies }: TechnologiesFrontendLayoutProps) => (
+  <section className="technologies-frontend-section" id="frontend" ref={sectionRef}>
     <div className="side-progress-container">
       <div className="progress-bar-track">
         <div className="progress-bar-fill"></div>
@@ -35,7 +35,7 @@ export const ProjectsMainLayout = ({ sectionRef, technologies }: ProjectsMainLay
 
     <div className="tech-container">
       <div className="tech-sidebar">
-        <ProjectTitle />
+        <TechnologiesFrontendTitle />
       </div>
 
       <div className="tech-content">

@@ -1,4 +1,4 @@
-.projects-section {
+.technologies-frontend-section {
   width: 100%;
   padding: 180px 50px;
   background-color: #ffffff;
@@ -56,7 +56,7 @@
   /* NIVEL MEDIO */
 }
 
-.projects-title {
+.technologies-frontend-title {
   font-family: var(--font-display, "Montserrat", sans-serif);
   font-size: clamp(2.2rem, 7vw, 5rem);
   font-weight: 900;
@@ -69,7 +69,7 @@
   transition: opacity 1s ease;
 }
 
-.projects-title.animate-in {
+.technologies-frontend-title.animate-in {
   opacity: 1;
 }
 
@@ -220,7 +220,7 @@
     z-index: 50;
   }
 
-  .projects-title {
+  .technologies-frontend-title {
     writing-mode: vertical-rl;
     transform: rotate(180deg);
     font-size: clamp(2.2rem, 7vw, 5rem); 
@@ -293,7 +293,7 @@
     gap: 12px;
   }
 
-  .projects-title {
+  .technologies-frontend-title {
     font-size: 1.3rem;
   }
 

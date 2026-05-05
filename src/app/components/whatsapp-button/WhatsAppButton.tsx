@@ -3,7 +3,7 @@
 import React, { useRef, useState } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
-import { useLang, T } from "../context/LanguageContext";
+import { useLang, T } from "../../context/LanguageContext";
 import "./WhatsAppButton.css";
 
 const MESSAGES = [
