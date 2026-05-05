@@ -58,13 +58,13 @@ export const WhatsAppButton = () => {
     <a 
       ref={buttonRef}
       href={whatsappUrl} 
-      className="whatsapp-float side-left" 
+      className="wa-float" 
       target="_blank" 
       rel="noopener noreferrer"
       aria-label="WhatsApp"
       style={{ left: "30px" }}
     >
-      <div className="whatsapp-bubble" ref={bubbleRef} style={{ opacity: 0, transform: "scale(0)" }}>
+      <div className="wa-bubble" ref={bubbleRef} style={{ opacity: 0, transform: "scale(0)" }}>
         <T 
           es={MESSAGES[currentMsgIndex].es} 
           en={MESSAGES[currentMsgIndex].en} 

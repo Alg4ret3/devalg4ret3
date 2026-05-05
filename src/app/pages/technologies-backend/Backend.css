@@ -1,50 +1,14 @@
-.projects-section {
+.tb-section {
   width: 100%;
-  padding: 180px 50px;
+  padding: 90px 50px;
   background-color: #ffffff;
   position: relative;
   z-index: 5;
 }
 
-/* --- Barra de progreso lateral --- */
-.side-progress-container {
-  position: absolute;
-  left: 20px;
-  top: 15%;
-  bottom: 15%;
-  width: 2px;
-  z-index: 5;
-}
+/* --- Tech Container --- */
 
-.side-progress-container.progress-right {
-  left: auto;
-  right: 20px;
-}
-
-.progress-bar-track {
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.05);
-}
-
-.progress-bar-fill {
-  width: 100%;
-  height: 0%;
-  background: #000000;
-}
-
-.progress-step-dot {
-  position: absolute;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 8px;
-  height: 8px;
-  background: #E9ECEF;
-  border-radius: 50%;
-  border: 2px solid #ffffff;
-}
-
-.tech-container {
+.tb-container {
   max-width: 1400px;
   margin: 0 auto;
   display: grid;
@@ -52,12 +16,13 @@
   gap: 80px;
 }
 
-.backend-section.flipped .tech-container {
-  grid-template-columns: 1fr 450px; /* Un poco más de espacio para el título largo */
+.tb-section.tb-flipped .tb-container {
+  grid-template-columns: 1fr 450px;
+  /* Un poco más de espacio para el título largo */
 }
 
 /* --- TÍTULO (CAPA MEDIA) --- */
-.tech-sidebar {
+.tb-sidebar {
   position: sticky;
   top: 180px;
   height: fit-content;
@@ -65,32 +30,30 @@
   /* NIVEL MEDIO */
 }
 
-.projects-title {
+.tb-title {
   font-family: var(--font-display, "Montserrat", sans-serif);
   font-size: clamp(2.2rem, 7vw, 5rem);
   font-weight: 900;
   text-transform: uppercase;
   color: #212529;
   letter-spacing: -0.05em;
-  line-height: 0.95;
+  line-height: 0.85;
   margin: 0;
+  max-width: 100%;
   opacity: 0;
   transition: opacity 1s ease;
 }
 
-.backend-section.flipped .projects-title {
+.tb-section.tb-flipped .tb-title {
   text-align: right;
-  font-size: clamp(2.2rem, 7vw, 5rem); /* Idéntico al frontend */
-  line-height: 0.95;
-  max-width: 100%;
 }
 
-.projects-title.animate-in {
+.tb-title.tb-animate-in {
   opacity: 1;
 }
 
 /* --- TEXTOS GIGANTES (CAPA FONDO) --- */
-.tech-bg-text-container {
+.tb-bg-text-container {
   position: absolute;
   top: 0;
   left: 0;
@@ -104,7 +67,7 @@
   pointer-events: none;
 }
 
-.tech-bg-text {
+.tb-bg-text {
   font-family: var(--font-display);
   font-size: clamp(10rem, 35vw, 30rem);
   font-weight: 900;
@@ -115,7 +78,7 @@
 }
 
 /* --- Tech Content --- */
-.tech-content {
+.tb-content {
   display: flex;
   flex-direction: column;
   gap: 180px;
@@ -123,22 +86,22 @@
   /* No ponemos z-index aquí para no crear un nuevo contexto que rompa el sándwich */
 }
 
-.tech-card-wrapper {
+.tb-card-wrapper {
   display: flex;
   width: 100%;
   position: relative;
 }
 
-.tech-card-wrapper.align-right {
+.tb-card-wrapper.tb-align-right {
   justify-content: flex-end;
 }
 
-.tech-card-wrapper.align-left {
+.tb-card-wrapper.tb-align-left {
   justify-content: flex-start;
 }
 
 /* --- TECH CARD (CAPA FRENTE) --- */
-.tech-card {
+.tb-card {
   width: 100%;
   max-width: 500px;
   background: #ffffff;
@@ -156,30 +119,30 @@
 }
 
 /* Variaciones de entrada */
-.tech-card.from-right {
+.tb-card.tb-from-right {
   transform: translateX(150px);
 }
 
-.tech-card.from-left {
+.tb-card.tb-from-left {
   transform: translateX(-150px);
 }
 
-.tech-card.bounce-in {
+.tb-card.tb-bounce-in {
   transform: translateY(120px) scale(0.8);
 }
 
-.tech-card.rotate-zoom {
+.tb-card.tb-rotate-zoom {
   transform: scale(0.5) rotate(15deg);
 }
 
 /* Estado activo */
-.tech-card.animate-in {
+.tb-card.tb-animate-in {
   opacity: 1;
   filter: blur(0px);
   transform: translate(0, 0) scale(1) rotate(0deg);
 }
 
-.tech-icon {
+.tb-icon {
   position: absolute;
   top: 40px;
   right: 40px;
@@ -189,7 +152,7 @@
   z-index: 0;
 }
 
-.tech-name {
+.tb-name {
   font-family: var(--font-display);
   font-size: 2.5rem;
   font-weight: 800;
@@ -197,7 +160,7 @@
   margin-bottom: 10px;
 }
 
-.tech-description {
+.tb-description {
   font-family: var(--font-sans);
   font-size: 0.9rem;
   font-weight: 700;
@@ -206,14 +169,14 @@
   margin-bottom: 30px;
 }
 
-.tech-divider {
+.tb-divider {
   width: 50px;
   height: 1px;
   background: #000000;
   margin-bottom: 30px;
 }
 
-.tech-use {
+.tb-use {
   font-family: var(--font-sans);
   font-size: 1.15rem;
   line-height: 1.6;
@@ -222,16 +185,16 @@
 
 /* --- RESPONSIVE MOBILE --- */
 @media (max-width: 1100px) {
-  .tech-container {
+  .tb-container {
     grid-template-columns: 45px 1fr;
     gap: 15px;
   }
 
-  .backend-section.flipped .tech-container {
+  .tb-section.tb-flipped .tb-container {
     grid-template-columns: 1fr 45px;
   }
 
-  .tech-sidebar {
+  .tb-sidebar {
     top: 100px;
     height: calc(100vh - 200px);
     display: flex;
@@ -240,94 +203,94 @@
     z-index: 50;
   }
 
-  .projects-title,
-  .backend-section.flipped .projects-title {
+  .tb-title,
+  .tb-section.tb-flipped .tb-title {
     writing-mode: vertical-rl;
     transform: rotate(180deg);
     font-size: clamp(2.2rem, 7vw, 5rem);
     opacity: 0.15 !important;
     letter-spacing: 0.1em;
-    text-align: inherit; /* Reset right alignment in vertical mode */
+    text-align: inherit;
+    /* Reset right alignment in vertical mode */
   }
 
-  .tech-card-wrapper {
+  .tb-card-wrapper {
     justify-content: flex-end !important;
   }
 
   /* --- MEJORA DE LA CARD EN MÓVIL --- */
-  .tech-card {
+  .tb-card {
     max-width: 100%;
     padding: 35px 25px;
     background: rgba(255, 255, 255, 0.98);
     border-radius: 12px;
     border: 1px solid rgba(0, 0, 0, 0.03);
-    box-shadow: 
+    box-shadow:
       0 15px 35px rgba(0, 0, 0, 0.05),
       0 5px 15px rgba(0, 0, 0, 0.03);
     z-index: 100;
   }
 
-  .tech-name {
+  .tb-name {
     font-size: 1.8rem;
     letter-spacing: -0.02em;
     margin-bottom: 8px;
   }
 
-  .tech-description {
+  .tb-description {
     font-size: 0.75rem;
     font-weight: 800;
     margin-bottom: 20px;
     color: #888;
   }
 
-  .tech-divider {
+  .tb-divider {
     width: 35px;
     height: 2px;
     background: #000;
     margin-bottom: 20px;
   }
 
-  .tech-use {
+  .tb-use {
     font-size: 0.95rem;
     line-height: 1.6;
     color: #444;
   }
 
-  .tech-icon {
+  .tb-icon {
     font-size: 2.2rem;
     top: 30px;
     right: 25px;
     opacity: 0.08;
   }
 
-  .tech-bg-text-container {
+  .tb-bg-text-container {
     display: none;
   }
 
-  .side-progress-container {
-    display: none; /* ELIMINAMOS LA LÍNEA DEL LADO IZQUIERDO EN MÓVIL */
-  }
+
 }
 
 @media (max-width: 480px) {
-  .tech-container {
+  .tb-container {
     grid-template-columns: 35px 1fr;
     gap: 12px;
   }
 
-  .projects-title {
-    font-size: 1.3rem;
+  .tb-title {
+    font-size: 1.8rem;
+    opacity: 0.25 !important;
   }
 
-  .tech-card {
+  .tb-card {
     padding: 30px 20px;
   }
-  
-  .tech-name {
+
+  .tb-name {
     font-size: 1.6rem;
   }
-  
-  .tech-use {
+
+  .tb-use {
     font-size: 0.9rem;
   }
 }

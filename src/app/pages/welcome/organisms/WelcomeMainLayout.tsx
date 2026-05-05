@@ -5,10 +5,10 @@ import { CargoText } from "../molecules/CargoText";
 import { ScrollIndicator } from "../molecules/ScrollIndicator";
 
 export const WelcomeMainLayout = ({ displayName, isMounted }: { displayName: string; isMounted: boolean }) => (
-  <section className="welcome" id="sobre-mi">
-    <div className="flip-container plain">
+  <section className="wp-section" id="sobre-mi">
+    <div className="wp-container wp-plain">
       {isMounted && displayName && <LettersGroup displayName={displayName} />}
-      <div className="mobile-break"></div>
+      <div className="wp-mobile-break"></div>
       {isMounted && <CargoText />}
     </div>
     <ScrollIndicator />

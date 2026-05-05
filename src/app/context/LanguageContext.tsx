@@ -52,7 +52,7 @@ export const T = ({ es, en }: { es: string; en: string }) => {
   const text = lang === "ES" ? es : en;
 
   return (
-    <span key={text} className="animate-lang-text">
+    <span key={text} className="gl-animate-lang-text">
       {text}
     </span>
   );

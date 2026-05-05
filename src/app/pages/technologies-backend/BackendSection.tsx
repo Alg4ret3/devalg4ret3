@@ -66,20 +66,8 @@ export const BackendSection = () => {
   const sectionRef = useRef<HTMLElement>(null);
 
   useGSAP(() => {
-    // Solo animamos la barra de progreso
-    gsap.to(".progress-bar-fill", {
-      height: "100%",
-      ease: "none",
-      scrollTrigger: {
-        trigger: ".tech-content",
-        start: "top center",
-        end: "bottom center",
-        scrub: true,
-      }
-    });
-
     // Parallax simple para los textos de fondo
-    gsap.utils.toArray<HTMLElement>(".tech-bg-text").forEach((text) => {
+    gsap.utils.toArray<HTMLElement>(".tb-bg-text").forEach((text) => {
       gsap.to(text, {
         y: -150,
         scrollTrigger: {

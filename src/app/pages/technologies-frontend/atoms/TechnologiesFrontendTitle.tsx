@@ -27,7 +27,7 @@ export const TechnologiesFrontendTitle = () => {
 
   return (
     <h2
-      className={`technologies-frontend-title ${inView ? "animate-in" : ""}`}
+      className={`tf-title ${inView ? "tf-animate-in" : ""}`}
       ref={titleRef}
     >
       <T es="Tecnologías Frontend" en="Frontend Technologies" />

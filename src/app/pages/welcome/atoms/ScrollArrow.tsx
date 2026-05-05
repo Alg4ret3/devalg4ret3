@@ -1,9 +1,9 @@
 "use client";
 
 export const ScrollArrow = () => (
-  <div className="scroll-line-container">
-    <div className="scroll-line">
-      <div className="scroll-dot"></div>
+  <div className="wp-scroll-line-container">
+    <div className="wp-scroll-line">
+      <div className="wp-scroll-dot"></div>
     </div>
   </div>
 );

@@ -1,4 +1,4 @@
-.not-found-container {
+.nf-container {
   min-height: 100vh;
   width: 100%;
   display: flex;
@@ -10,7 +10,7 @@
   overflow: hidden;
 }
 
-.error-content {
+.nf-content {
   position: relative;
   z-index: 1;
   text-align: center;
@@ -18,7 +18,7 @@
   padding: 0 20px;
 }
 
-.error-glitch {
+.nf-glitch {
   font-family: var(--font-sans, sans-serif);
   font-size: clamp(8rem, 20vw, 15rem);
   font-weight: 900;
@@ -29,7 +29,7 @@
   position: relative;
 }
 
-.error-message {
+.nf-message {
   font-family: var(--font-sans, sans-serif);
   font-size: clamp(1.2rem, 3vw, 2rem);
   font-weight: 600;
@@ -38,7 +38,7 @@
   color: #000000;
 }
 
-.error-submessage {
+.nf-submessage {
   font-family: var(--font-sans, sans-serif);
   font-size: clamp(0.9rem, 2vw, 1.1rem);
   color: #666666;
@@ -46,7 +46,7 @@
   line-height: 1.5;
 }
 
-.error-button {
+.nf-button {
   display: inline-block;
   position: relative;
   padding: 15px 40px;
@@ -57,7 +57,7 @@
   cursor: pointer;
 }
 
-.error-button .btn-text {
+.nf-button .nf-btn-text {
   position: relative;
   z-index: 2;
   font-family: var(--font-sans, sans-serif);
@@ -67,7 +67,7 @@
   transition: color 0.3s ease;
 }
 
-.error-button .btn-bg {
+.nf-button .nf-btn-bg {
   position: absolute;
   top: 100%;
   left: 0;
@@ -79,16 +79,16 @@
   border-radius: 0;
 }
 
-.error-button:hover .btn-text {
+.nf-button:hover .nf-btn-text {
   color: #ffffff;
 }
 
-.error-button:hover .btn-bg {
+.nf-button:hover .nf-btn-bg {
   top: 0;
 }
 
 @media (max-width: 768px) {
-  .error-button {
+  .nf-button {
     padding: 12px 30px;
   }
 }

@@ -1,4 +1,4 @@
-.welcome {
+.wp-section {
   width: 100%;
   height: 100vh; /* Forzamos altura de pantalla completa */
   background-color: var(--bg-main);
@@ -11,7 +11,7 @@
 }
 
 /* Contenedor principal */
-.flip-container {
+.wp-container {
   display: flex;
   height: 100%;
   width: 100%;
@@ -22,39 +22,39 @@
   position: relative; /* Necesario para GSAP Flip absolute: true */
 }
 
-.flip-container.plain {
+.wp-container.wp-plain {
   flex-direction: row;
   justify-content: center;
   align-items: center;
 }
 
-.flip-container.grid,
-.flip-container.columns {
+.wp-container.wp-grid,
+.wp-container.wp-columns {
   align-content: stretch;
   align-items: stretch;
   flex-wrap: wrap;
 }
 
 /* Letras */
-.flip-container.final {
+.wp-container.wp-final {
   flex-wrap: wrap;
   justify-content: center;
   align-content: center;
   gap: 20px 0; /* Solo espacio vertical (entre líneas), 0px entre letras */
 }
 
-.flip-container.final .mobile-break {
+.wp-container.wp-final .wp-mobile-break {
   display: block;
   width: 100%;
   height: 0;
 }
 
-.mobile-break {
+.wp-mobile-break {
   display: none;
 }
 
 /* Letras */
-.letter {
+.wp-letter {
   text-align: center;
   font-size: 10vmax;
   font-family: var(--font-display);
@@ -68,44 +68,44 @@
   color: var(--brand-3); /* Color base oscuro para contraste */
 }
 
-.flip-container.grid .letter {
+.wp-container.wp-grid .wp-letter {
   flex-basis: 25%;
   height: 50%;
 }
 
-.flip-container.columns .letter {
+.wp-container.wp-columns .wp-letter {
   flex: 1;
   height: 100%;
 }
 
 /* Responsividad Móvil */
 @media (max-width: 768px) {
-  .letter {
+  .wp-letter {
     font-size: 15vw;
   }
 
-  .flip-container.grid .letter {
+  .wp-container.wp-grid .wp-letter {
     flex-basis: 50%; /* 2 columnas */
     height: 33.333%; /* 3 filas para SERGIO (6 letras) */
   }
 
-  .flip-container.columns {
+  .wp-container.wp-columns {
     flex-direction: column;
   }
 
-  .flip-container.columns .letter {
+  .wp-container.wp-columns .wp-letter {
     flex: 1;
     width: 100%;
     height: auto; /* Se reparte el alto gracias a flex: 1 */
   }
 
-  .info-text {
+  .wp-info-text {
     font-size: 4vw;
   }
 }
 
 /* Texto adicional */
-.info-text {
+.wp-info-text {
   position: absolute;
   top: 25%; /* Ahora por encima del título */
   left: 50%;
@@ -122,32 +122,28 @@
   z-index: 20;
 }
 
-.flip-container.final .info-text {
-  /* Eliminado para evitar conflictos con GSAP */
-}
-
 /* Asignación de la nueva paleta generada (Escritorio) */
-.L1 { background: var(--brand-2); color: var(--brand-9); }
-.L2 { background: var(--brand-3); color: var(--brand-9); }
-.L3 { background: var(--brand-4); color: var(--brand-9); }
-.L4 { background: var(--brand-5); color: var(--brand-9); }
-.L5 { background: var(--brand-6); color: white; }
-.L6 { background: var(--brand-7); color: white; }
-.L7 { background: var(--brand-8); color: white; }
-.L8 { background: var(--brand-9); color: white; }
+.wp-L1 { background: var(--brand-2); color: var(--brand-9); }
+.wp-L2 { background: var(--brand-3); color: var(--brand-9); }
+.wp-L3 { background: var(--brand-4); color: var(--brand-9); }
+.wp-L4 { background: var(--brand-5); color: var(--brand-9); }
+.wp-L5 { background: var(--brand-6); color: white; }
+.wp-L6 { background: var(--brand-7); color: white; }
+.wp-L7 { background: var(--brand-8); color: white; }
+.wp-L8 { background: var(--brand-9); color: white; }
 
 /* Sobreescritura de colores para Mobile (AG4RT3 - 6 letras) */
 @media (max-width: 768px) {
-  .L1 { background: var(--brand-3); color: var(--brand-9); }
-  .L2 { background: var(--brand-4); color: var(--brand-9); }
-  .L3 { background: var(--brand-5); color: var(--brand-9); }
-  .L4 { background: var(--brand-7); color: white; }
-  .L5 { background: var(--brand-8); color: white; }
-  .L6 { background: var(--brand-9); color: white; }
+  .wp-L1 { background: var(--brand-3); color: var(--brand-9); }
+  .wp-L2 { background: var(--brand-4); color: var(--brand-9); }
+  .wp-L3 { background: var(--brand-5); color: var(--brand-9); }
+  .wp-L4 { background: var(--brand-7); color: white; }
+  .wp-L5 { background: var(--brand-8); color: white; }
+  .wp-L6 { background: var(--brand-9); color: white; }
 }
 
 /* Layout plain */
-.flip-container.plain .letter {
+.wp-container.wp-plain .wp-letter {
   background: transparent !important;
   color: var(--brand-9) !important;
   padding: 0;
@@ -155,15 +151,8 @@
   height: auto;
 }
 
-/* Texto adicional */
-/* Estilos consolidados arriba */
-
-.flip-container.final .info-text {
-  /* Eliminamos el display: block automático para que GSAP lo controle al 100% */
-}
-
 /* Fin de estilos Welcome */
-.scroll-indicator {
+.wp-scroll-indicator {
   position: absolute;
   bottom: 30px;
   left: 0;
@@ -186,11 +175,11 @@
   padding: 0 20px;
 }
 
-.scroll-indicator p {
+.wp-scroll-indicator p {
   margin: 0;
 }
 
-.scroll-line-container {
+.wp-scroll-line-container {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -198,7 +187,7 @@
   margin-top: 8px;
 }
 
-.scroll-line {
+.wp-scroll-line {
   width: 2px;
   height: 100%;
   background-color: var(--brand-3, #ccc);
@@ -207,7 +196,7 @@
   border-radius: 2px;
 }
 
-.scroll-dot {
+.wp-scroll-dot {
   position: absolute;
   top: -50%;
   left: 0;
@@ -215,10 +204,10 @@
   height: 40%;
   background-color: var(--brand-8, #333);
   border-radius: 2px;
-  animation: scroll-down-anim 1.5s infinite cubic-bezier(0.65, 0, 0.35, 1);
+  animation: wp-scroll-down-anim 1.5s infinite cubic-bezier(0.65, 0, 0.35, 1);
 }
 
-@keyframes scroll-down-anim {
+@keyframes wp-scroll-down-anim {
   0% {
     top: -50%;
   }

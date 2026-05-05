@@ -3,5 +3,5 @@
 import React from "react";
 
 export const TechName = ({ name }: { name: string }) => (
-  <h3 className="tech-name">{name}</h3>
+  <h3 className="tf-name">{name}</h3>
 );

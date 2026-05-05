@@ -49,47 +49,47 @@ export const Navbar = ({ isVisible }: NavbarProps) => {
   ];
 
   return (
-    <nav className={`navbar ${isVisible ? "visible" : ""}`} ref={menuRef}>
+    <nav className={`nb-nav ${isVisible ? "nb-visible" : ""}`} ref={menuRef}>
 
       {/* ── Hamburger ── */}
       <button
-        className={`nav-hamburger ${menuOpen ? "open" : ""}`}
+        className={`nb-hamburger ${menuOpen ? "nb-open" : ""}`}
         onClick={() => setMenuOpen((v) => !v)}
         aria-label="Menú"
       >
-        <span className="ham-line" />
-        <span className="ham-line ham-line--mid" />
-        <span className="ham-line" />
+        <span className="nb-ham-line" />
+        <span className="nb-ham-line nb-ham-line--mid" />
+        <span className="nb-ham-line" />
       </button>
 
       {/* ── Language switcher ── */}
       <button
-        className="nav-lang"
+        className="nb-lang"
         onClick={handleLangToggle}
         aria-label={t("Cambiar a inglés", "Switch to Spanish")}
       >
-        <span className={`nav-lang-text ${fading ? "nav-lang-text--out" : ""}`}>
+        <span className={`nb-lang-text ${fading ? "nb-lang-text--out" : ""}`}>
           {lang}
         </span>
       </button>
 
       {/* ── CV ── */}
       <button
-        className="nav-cv"
+        className="nb-cv"
         onClick={handleDownloadCV}
         aria-label={t("Descargar CV", "Download Resume")}
         title={t("Descargar CV", "Download Resume")}
       >
-        <span className="nav-cv-label">CV</span>
+        <span className="nb-cv-label">CV</span>
       </button>
 
       {/* ── Dropdown ── */}
-      <div className={`nav-dropdown ${menuOpen ? "nav-dropdown--open" : ""}`}>
+      <div className={`nb-dropdown ${menuOpen ? "nb-dropdown--open" : ""}`}>
         {navLinks.map(({ href, es, en }) => (
           <a
             key={href}
             href={href}
-            className="nav-dropdown-link"
+            className="nb-dropdown-link"
             onClick={() => setMenuOpen(false)}
           >
             <T es={es} en={en} />

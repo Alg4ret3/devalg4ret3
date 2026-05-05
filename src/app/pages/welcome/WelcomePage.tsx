@@ -25,16 +25,16 @@ export default function WelcomePage({ onAnimationComplete }: { onAnimationComple
   useEffect(() => {
     if (!isMounted || !displayName) return;
 
-    const layouts = ["plain", "columns", "grid", "final"];
-    const container = document.querySelector(".flip-container")!;
+    const layouts = ["wp-plain", "wp-columns", "wp-grid", "wp-final"];
+    const container = document.querySelector(".wp-container")!;
     let curLayout = 0;
     let stopAfterNextFinal = false;
 
-    container.classList.remove("final");
-    container.classList.add("plain");
+    container.classList.remove("wp-final");
+    container.classList.add("wp-plain");
 
     function nextState() {
-      const state = Flip.getState(".letter", {
+      const state = Flip.getState(".wp-letter", {
         props: "color,backgroundColor",
         simple: true,
       });
@@ -55,13 +55,13 @@ export default function WelcomePage({ onAnimationComplete }: { onAnimationComple
         stagger: 0.07,
         duration: 0.7,
         ease: "power2.inOut",
-        spin: targetLayout === "final",
+        spin: targetLayout === "wp-final",
         simple: true,
         onComplete: () => {
-          if (stopAfterNextFinal && targetLayout === "final") {
+          if (stopAfterNextFinal && targetLayout === "wp-final") {
             const tl = gsap.timeline();
             
-            tl.fromTo(".info-char", 
+            tl.fromTo(".wp-info-char", 
               { 
                 yPercent: -500, // Revertido: vuelve a caer desde ARRIBA
                 opacity: 0
@@ -73,12 +73,12 @@ export default function WelcomePage({ onAnimationComplete }: { onAnimationComple
                 duration: 0.6, 
                 ease: "power4.out",
                 onStart: () => {
-                  gsap.set(".info-text", { opacity: 1 });
+                  gsap.set(".wp-info-text", { opacity: 1 });
                 }
               }
             );
 
-            tl.to(".scroll-indicator", {
+            tl.to(".wp-scroll-indicator", {
               opacity: 1,
               y: 0,
               duration: 1.2,
@@ -98,7 +98,7 @@ export default function WelcomePage({ onAnimationComplete }: { onAnimationComple
         onLeave: (elements) => gsap.to(elements, { opacity: 0 }),
       });
 
-      if (!(stopAfterNextFinal && targetLayout === "final")) {
+      if (!(stopAfterNextFinal && targetLayout === "wp-final")) {
         gsap.delayedCall(1.5, nextState);
       }
     }

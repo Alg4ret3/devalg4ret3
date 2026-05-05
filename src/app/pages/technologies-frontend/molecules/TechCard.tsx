@@ -39,13 +39,13 @@ export const TechCard = ({ id, name, descriptionEs, descriptionEn, useEs, useEn,
     return () => observer.disconnect();
   }, []);
 
-  const animationClasses = ["from-right", "from-left", "bounce-in", "rotate-zoom"];
+  const animationClasses = ["tf-from-right", "tf-from-left", "tf-bounce-in", "tf-rotate-zoom"];
   const animationClass = animationClasses[index % animationClasses.length];
   
   return (
     <div 
       ref={cardRef}
-      className={`tech-card ${animationClass} ${inView ? "animate-in" : ""}`}
+      className={`tf-card ${animationClass} ${inView ? "tf-animate-in" : ""}`}
     >
       <TechIcon name={name} />
       <TechName name={name} />

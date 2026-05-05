@@ -45,7 +45,7 @@ export const TechIcon = ({ name }: TechIconProps) => {
   };
 
   return (
-    <div className="tech-icon">
+    <div className="tb-icon">
       {icons[name] || null}
     </div>
   );

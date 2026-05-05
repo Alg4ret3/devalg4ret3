@@ -36,7 +36,7 @@ body {
   overflow-y: auto;
 }
 
-.no-scroll {
+.gl-no-scroll {
   /* Ya no limitamos la altura para que el navegador vea que hay contenido abajo */
 }
 
@@ -46,7 +46,7 @@ body {
 }
 
 /* ── Language change animation ── */
-@keyframes langTextIn {
+@keyframes gl-lang-text-in {
   0% {
     opacity: 0;
     filter: blur(12px);
@@ -59,8 +59,8 @@ body {
   }
 }
 
-.animate-lang-text {
+.gl-animate-lang-text {
   display: inline-block;
-  animation: langTextIn 0.7s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+  animation: gl-lang-text-in 0.7s cubic-bezier(0.23, 1, 0.32, 1) forwards;
   will-change: transform, opacity, filter;
 }

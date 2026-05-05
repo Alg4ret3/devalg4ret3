@@ -27,7 +27,7 @@ export const BackendTitle = () => {
 
   return (
     <h2
-      className={`projects-title backend-title ${inView ? "animate-in" : ""}`}
+      className={`tb-title ${inView ? "tb-animate-in" : ""}`}
       ref={titleRef}
     >
       <T es="Tecnologías Backend" en="Backend Technologies" />
