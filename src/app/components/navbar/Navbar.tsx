@@ -85,34 +85,39 @@ export const Navbar = ({ isVisible }: NavbarProps) => {
       </button>
 
       {/* ── Dropdown ── */}
-      <div className={`nb-dropdown ${menuOpen ? "nb-dropdown--open" : ""}`}>
-        {view === "main" ? (
-          <>
-            <a 
-              href="#welcome" 
-              className="nb-dropdown-link" 
+       <div className={`nb-dropdown ${menuOpen ? "nb-dropdown--open" : ""}`}>
+         {view === "main" ? (
+           <>
+            <button
+              className="nb-dropdown-link"
               onClick={() => {
                 setMenuOpen(false);
-                // Instant jump to top
-                window.scrollTo({ top: 0, behavior: "auto" });
-                const welcomeEl = document.getElementById("welcome");
-                if (welcomeEl) {
-                  welcomeEl.scrollIntoView({ behavior: "auto" });
+                // Scroll al tope - cubrimos todos los contenedores posibles
+                const mainEl = document.getElementById("home");
+                const scrollingElement = document.scrollingElement;
+
+                if (mainEl && mainEl !== scrollingElement) {
+                  mainEl.scrollTo({ top: 0, behavior: "auto" });
                 }
+                if (scrollingElement) {
+                  scrollingElement.scrollTo({ top: 0, behavior: "auto" });
+                }
+                // También forzar en window por si acaso
+                window.scrollTo(0, 0);
               }}
             >
               <T es="Inicio" en="Home" />
-            </a>
-            <button className="nb-dropdown-link" onClick={() => setView("tech")}>
-              <T es="Tecnologías" en="Technologies" />
             </button>
-            <a href="#proyectos" className="nb-dropdown-link" onClick={() => setMenuOpen(false)}>
-              <T es="Proyectos" en="Projects" />
-            </a>
-            <a href="#sobre-mi" className="nb-dropdown-link" onClick={() => setMenuOpen(false)}>
-              <T es="Sobre mí" en="About me" />
-            </a>
-          </>
+             <button className="nb-dropdown-link" onClick={() => setView("tech")}>
+               <T es="Tecnologías" en="Technologies" />
+             </button>
+              <a href="#projects" className="nb-dropdown-link" onClick={() => setMenuOpen(false)}>
+                <T es="Proyectos" en="Projects" />
+              </a>
+              <a href="#about" className="nb-dropdown-link" onClick={() => setMenuOpen(false)}>
+                <T es="Sobre mí" en="About me" />
+              </a>
+           </>
         ) : (
           <>
             <button className="nb-dropdown-link nb-back" onClick={() => setView("main")} aria-label={t("Volver", "Back")}>

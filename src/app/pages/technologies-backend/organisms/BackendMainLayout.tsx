@@ -2,7 +2,7 @@
 
 import React from "react";
 import { BackendTitle } from "../atoms/BackendTitle";
-import { TechCard } from "../molecules/TechCard";
+import { TechCard } from "../../../components/tech";
 
 interface Tech {
   id: number;
@@ -38,7 +38,15 @@ export const BackendMainLayout = ({ sectionRef, technologies }: BackendMainLayou
               <span className="tb-bg-text">{tech.name}</span>
               <span className="tb-bg-text">{tech.name}</span>
             </div>
-            <TechCard {...tech} index={index} />
+             <TechCard
+               name={tech.name}
+               descriptionEs={tech.descriptionEs}
+               descriptionEn={tech.descriptionEn}
+               useEs={tech.useEs}
+               useEn={tech.useEn}
+               index={index}
+               variant="backend"
+             />
           </div>
         ))}
       </div>

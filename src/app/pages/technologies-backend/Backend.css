@@ -106,10 +106,12 @@
 .tb-card {
   width: 100%;
   max-width: 500px;
-  background: rgba(255, 255, 255, 0.7); /* Aura Glass effect */
+  background: rgba(255, 255, 255, 0.7);
+  /* Aura Glass effect */
   backdrop-filter: blur(15px);
   padding: 60px;
-  border-radius: 20px; /* Smooth, friendly corners */
+  border-radius: 20px;
+  /* Smooth, friendly corners */
   border: 1px solid rgba(255, 255, 255, 0.5);
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.04);
   position: relative;
@@ -132,10 +134,21 @@
 }
 
 /* Entry variations */
-.tb-card.tb-from-right { transform: translateX(100px); }
-.tb-card.tb-from-left { transform: translateX(-100px); }
-.tb-card.tb-bounce-in { transform: scale(0.5); }
-.tb-card.tb-rotate-zoom { transform: scale(0.7) rotate(-5deg); }
+.tb-card.tb-from-right {
+  transform: translateX(100px);
+}
+
+.tb-card.tb-from-left {
+  transform: translateX(-100px);
+}
+
+.tb-card.tb-bounce-in {
+  transform: scale(0.5);
+}
+
+.tb-card.tb-rotate-zoom {
+  transform: scale(0.7) rotate(-5deg);
+}
 
 .tb-card.tb-animate-in.tb-from-right,
 .tb-card.tb-animate-in.tb-from-left,
@@ -150,7 +163,8 @@
   right: 40px;
   font-size: 3.5rem;
   color: #000000;
-  opacity: 0.05; /* Even more subtle icon */
+  opacity: 0.05;
+  /* Even more subtle icon */
   z-index: 0;
 }
 
@@ -172,7 +186,8 @@
 }
 
 .tb-divider {
-  display: none; /* Removed for a cleaner look */
+  display: none;
+  /* Removed for a cleaner look */
 }
 
 .tb-use {
@@ -193,7 +208,8 @@
     width: 100%;
     display: grid;
     /* RESTAURADO GRID */
-    grid-template-columns: 1fr 45px; /* Back to 1 line */
+    grid-template-columns: 1fr 45px;
+    /* Back to 1 line */
     gap: 15px;
     padding: 0;
     align-items: stretch;

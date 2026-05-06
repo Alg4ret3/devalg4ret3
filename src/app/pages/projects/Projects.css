@@ -1,0 +1,198 @@
+/* ═════════════════════════════════════════════════════════════════════════════════
+   PROJECTS — Seamless Brutalist Layout (B&W Filter)
+   ═════════════════════════════════════════════════════════════════════════════════ */
+
+.pj-section {
+  width: 100%;
+  height: 100vh;
+  position: relative;
+  z-index: 5;
+  overflow: hidden;
+  background-color: #000;
+}
+
+.pj-cards-container {
+  display: flex;
+  flex-wrap: nowrap;
+  height: 100vh;
+  width: max-content;
+  align-items: center;
+  will-change: transform;
+  margin: 0;
+  padding: 0;
+}
+
+/* ── Individual Project Card ── */
+.pj-item-card {
+  width: 50vw;
+  height: 100vh;
+  position: relative;
+  overflow: hidden;
+  background: #000;
+  cursor: default;
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+}
+
+.pj-card-img-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.pj-card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(100%) brightness(0.6);
+  transition: filter 0.6s ease, transform 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.pj-item-card:hover .pj-card-img {
+  filter: grayscale(100%) brightness(0.9);
+  transform: scale(1.03);
+}
+
+.pj-card-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.8) 100%);
+  z-index: 2;
+}
+
+/* ── Card Content ── */
+.pj-card-content {
+  position: relative;
+  z-index: 10;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 8vw;
+  color: white;
+}
+
+.pj-card-header {
+  margin-bottom: 30px;
+}
+
+.pj-card-title {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4vw, 4.5rem);
+  font-weight: 900;
+  line-height: 1;
+  text-transform: uppercase;
+  margin-bottom: 15px;
+  letter-spacing: -0.02em;
+}
+
+.pj-card-desc {
+  font-family: var(--font-sans);
+  font-size: 1.1rem;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.7);
+  max-width: 450px;
+}
+
+/* Tech Stack Tags */
+.pj-card-tech {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 40px;
+}
+
+.pj-tech-tag {
+  font-family: var(--font-sans);
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 6px 14px;
+  border-radius: 2px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Action Buttons */
+.pj-card-actions {
+  display: flex;
+  gap: 15px;
+}
+
+.pj-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 24px;
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  border-radius: 4px;
+}
+
+.pj-btn-primary {
+  background: white;
+  color: black;
+}
+
+.pj-btn-primary:hover {
+  background: rgba(255, 255, 255, 0.8);
+}
+
+.pj-btn-outline {
+  background: transparent;
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+.pj-btn-outline:hover {
+  border-color: white;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 1024px) {
+  .pj-card-content {
+    padding: 0 5vw;
+  }
+}
+
+@media (max-width: 768px) {
+  .pj-item-card {
+    width: 100vw;
+    border-right: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .pj-card-content {
+    padding: 0 8vw;
+    justify-content: flex-end;
+    padding-bottom: 100px;
+  }
+
+  .pj-card-title {
+    font-size: clamp(2.5rem, 12vw, 4rem);
+  }
+
+  .pj-card-desc {
+    font-size: 1rem;
+    max-width: 100%;
+  }
+
+  .pj-card-tech {
+    margin-bottom: 30px;
+  }
+}

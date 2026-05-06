@@ -8,6 +8,8 @@ import { Navbar } from "./components/navbar/Navbar";
 // Dynamic imports para optimizar el bundle (Lazy loading de componentes pesados)
 const TechnologiesFrontendSection = dynamic(() => import("./pages/technologies-frontend/TechnologiesFrontendSection").then(mod => mod.TechnologiesFrontendSection));
 const BackendSection = dynamic(() => import("./pages/technologies-backend/BackendSection").then(mod => mod.BackendSection));
+const TextShowcase = dynamic(() => import("./pages/textshowcase/TextShowcase").then(mod => mod.TextShowcase), { ssr: false });
+const ProjectsSection = dynamic(() => import("./pages/projects/ProjectsSection").then(mod => mod.ProjectsSection));
 import { Footer } from "./components/footer/Footer";
 const WhatsAppButton = dynamic(() => import("./components/whatsapp-button/WhatsAppButton").then(mod => mod.WhatsAppButton), { ssr: false });
 
@@ -49,14 +51,20 @@ export default function Home() {
     };
   }, [isFinished]);
 
-  return (
-    <main id="home" className={!isFinished ? "gl-no-scroll" : ""}>
-      <Navbar isVisible={isFinished} />
-      <WelcomePage onAnimationComplete={handleAnimationComplete} />
-      <TechnologiesFrontendSection />
-      <BackendSection />
-      {isFinished && <Footer />}
-      <WhatsAppButton />
-    </main>
-  );
+   return (
+     <main id="home" className={!isFinished ? "gl-no-scroll" : ""}>
+       <Navbar isVisible={isFinished} />
+       <WelcomePage onAnimationComplete={handleAnimationComplete} />
+       <TechnologiesFrontendSection />
+       <BackendSection />
+       <div className="section-container">
+         <TextShowcase />
+       </div>
+       <div className="section-container">
+         <ProjectsSection />
+       </div>
+       {isFinished && <Footer />}
+       <WhatsAppButton />
+     </main>
+   );
 }

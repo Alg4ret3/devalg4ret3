@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useRef } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
-import { useLang, T } from "../../context/LanguageContext";
+import { T } from "../../context/LanguageContext";
 import "./not-found.css";
 
 export default function NotFound() {

@@ -2,7 +2,7 @@
 
 import { ScrollArrow } from "../atoms/ScrollArrow";
 import { ScrollText } from "../atoms/ScrollText";
-import { useLang, T } from "../../../context/LanguageContext";
+import { T } from "../../../context/LanguageContext";
 
 export const ScrollIndicator = () => {
   return (
