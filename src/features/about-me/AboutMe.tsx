@@ -1,122 +1,154 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import Typed from "typed.js";
 import "./AboutMe.css";
 
 gsap.registerPlugin(ScrollTrigger);
 
+const photos = [
+  "https://images.pexels.com/photos/1181671/pexels-photo-1181671.jpeg?auto=compress&cs=tinysrgb&w=600",
+  "https://images.pexels.com/photos/1181675/pexels-photo-1181675.jpeg?auto=compress&cs=tinysrgb&w=600",
+  "https://images.pexels.com/photos/1181467/pexels-photo-1181467.jpeg?auto=compress&cs=tinysrgb&w=600",
+  "https://images.pexels.com/photos/1181271/pexels-photo-1181271.jpeg?auto=compress&cs=tinysrgb&w=600"
+];
+
 export const AboutMe = () => {
+  const [currentPhoto, setCurrentPhoto] = useState(0);
   const containerRef = useRef<HTMLElement>(null);
-  const typedRef = useRef<HTMLSpanElement>(null);
-  const typedInstance = useRef<Typed | null>(null);
+  const carouselRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    // Initialize Typed.js
-    if (typedRef.current) {
-      typedInstance.current = new Typed(typedRef.current, {
-        strings: ["", "creators.", "editors."],
-        typeSpeed: 100,
-        backSpeed: 40,
-        loop: true
-      });
+    // Auto-advance carousel
+    const interval = setInterval(() => {
+      setCurrentPhoto((prev) => (prev + 1) % photos.length);
+    }, 4000);
+
+    // GSAP animations
+    if (containerRef.current) {
+      const ctx = gsap.context(() => {
+        // Animate content on scroll
+        gsap.fromTo(".about-content",
+          { opacity: 0, y: 50 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 1,
+            scrollTrigger: {
+              trigger: containerRef.current,
+              start: "top 80%",
+              end: "bottom 20%",
+              once: true
+            }
+          }
+        );
+
+        // Animate carousel
+        gsap.fromTo(".photo-carousel",
+          { opacity: 0, scale: 0.9 },
+          {
+            opacity: 1,
+            scale: 1,
+            duration: 1.2,
+            delay: 0.3,
+            scrollTrigger: {
+              trigger: containerRef.current,
+              start: "top 80%",
+              once: true
+            }
+          }
+        );
+      }, containerRef);
+
+      return () => {
+        clearInterval(interval);
+        ctx.revert();
+      };
     }
 
-    // GSAP text splitting animation
-    const introsplitTypes = document.querySelectorAll(".left-part h1");
-    introsplitTypes.forEach((char, i) => {
-      // Simple text splitting by characters
-      const text = char.textContent || '';
-      const chars = text.split('');
-
-      char.innerHTML = chars.map(char =>
-        char === ' ' ? '<span>&nbsp;</span>' : `<span class="char">${char}</span>`
-      ).join('');
-
-      const charElements = char.querySelectorAll('.char');
-      gsap.set(charElements, { y: -515 });
-      gsap.to(charElements, {
-        y: 0,
-        stagger: 0.08,
-        duration: 0.3,
-        ease: "power2.out"
-      });
-    });
-
-    return () => {
-      if (typedInstance.current) {
-        typedInstance.current.destroy();
-      }
-      ScrollTrigger.killAll();
-    };
+    return () => clearInterval(interval);
   }, []);
+
+  const nextPhoto = () => {
+    setCurrentPhoto((prev) => (prev + 1) % photos.length);
+  };
+
+  const prevPhoto = () => {
+    setCurrentPhoto((prev) => (prev - 1 + photos.length) % photos.length);
+  };
 
   return (
     <section className="am-section" ref={containerRef}>
-      <div className="info-section">
-        <div className="left-part">
-          <h1>
-            <span className="d-flex">we make</span>
-            <span className="text" ref={typedRef}></span>
-          </h1>
-          <p>I create amazing digital experiences with modern technologies</p>
-          <a href="#projects" className="book-link">
-            <span className="linktext">View My Work</span>
-            <span className="arrow">
-              <span></span>
-            </span>
+      <div className="about-container">
+        <div className="about-content">
+          <h2 className="about-title">About Me</h2>
+          <div className="about-text">
+            <p>
+              I'm a passionate full-stack developer with expertise in modern web technologies.
+              I love creating clean, efficient, and user-friendly digital experiences that make a difference.
+            </p>
+            <p>
+              My journey in development started with curiosity and has evolved into a deep appreciation
+              for the art of coding. I believe in writing maintainable code, staying up-to-date with
+              industry trends, and continuously learning new technologies.
+            </p>
+            <p>
+              When I'm not coding, you'll find me exploring new frameworks, contributing to open-source
+              projects, or enjoying the outdoors. I value collaboration, creativity, and the impact
+              that well-designed software can have on people's lives.
+            </p>
+          </div>
+
+          <div className="skills-preview">
+            <div className="skill-tag">React</div>
+            <div className="skill-tag">TypeScript</div>
+            <div className="skill-tag">Next.js</div>
+            <div className="skill-tag">Node.js</div>
+            <div className="skill-tag">Python</div>
+          </div>
+
+          <a href="#projects" className="about-cta">
+            View My Work
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+              <path d="M7 13L13 7M13 7H9M13 7V11" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
           </a>
         </div>
-        <div className="right-part">
-          <div className="bg-line">
-            <img src="https://www.yudiz.com/codepen/photography-banner/wave.svg" alt="Line" />
-            <img src="https://www.yudiz.com/codepen/photography-banner/wave.svg" alt="Line" />
+
+        <div className="photo-carousel" ref={carouselRef}>
+          <div className="carousel-container">
+            {photos.map((photo, index) => (
+              <div
+                key={index}
+                className={`carousel-slide ${index === currentPhoto ? 'active' : ''}`}
+                style={{ backgroundImage: `url(${photo})` }}
+              />
+            ))}
           </div>
 
-          <div className="main-grid d-flex">
-            <div className="box">
-              <span>React</span>
-            </div>
-            <div className="box">
-              <div className="bg-img">
-                <img src="https://www.yudiz.com/codepen/photography-banner/photography.png" alt="React" />
-              </div>
-            </div>
-            <div className="box">
-              <span>TypeScript</span>
-            </div>
-            <div className="box">
-              <span>Next.js</span>
-            </div>
-            <div className="box">
-              <div className="bg-img">
-                <img src="https://www.yudiz.com/codepen/photography-banner/VFX.png" alt="Next.js" />
-              </div>
-            </div>
-            <div className="box">
-              <div className="bg-img">
-                <img src="https://www.yudiz.com/codepen/photography-banner/under-water.png" alt="TypeScript" />
-              </div>
-            </div>
-            <div className="box">
-              <span>GSAP</span>
-            </div>
-            <div className="box">
-              <div className="bg-img">
-                <img src="https://www.yudiz.com/codepen/photography-banner/Videography.png" alt="GSAP" />
-              </div>
-            </div>
-          </div>
+          <div className="carousel-controls">
+            <button className="carousel-btn" onClick={prevPhoto}>
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path d="M15 18L9 12L15 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+            </button>
 
-          <div className="bg-circle-h-line">
-            <img src="https://www.yudiz.com/codepen/photography-banner/circle-ring.svg" alt="Horizontal-circle" />
-            <img src="https://www.yudiz.com/codepen/photography-banner/circle-ring.svg" alt="Horizontal-circle" />
-            <img src="https://www.yudiz.com/codepen/photography-banner/circle-ring.svg" alt="Horizontal-circle" />
-          </div>
-          <div className="bg-dash-circle">
-            <img src="https://www.yudiz.com/codepen/photography-banner/dash-circle.svg" alt="dash-circle" />
+            <div className="carousel-indicators">
+              {photos.map((_, index) => (
+                <button
+                  key={index}
+                  className={`indicator ${index === currentPhoto ? 'active' : ''}`}
+                  onClick={() => setCurrentPhoto(index)}
+                />
+              ))}
+            </div>
+
+            <button className="carousel-btn" onClick={nextPhoto}>
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path d="M9 18L15 12L9 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+            </button>
           </div>
         </div>
       </div>
