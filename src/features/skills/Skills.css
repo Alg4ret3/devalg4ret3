@@ -1,0 +1,62 @@
+.sk-section {
+  width: 100%;
+  padding: 20px 0;
+  background-color: var(--brand-1);
+  overflow: hidden;
+  position: relative;
+}
+
+.sk-carousel-wrapper {
+  width: 100%;
+  overflow: hidden;
+}
+
+.sk-carousel {
+  display: flex;
+  width: max-content;
+  gap: 20px;
+
+  will-change: transform;
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+
+  cursor: grab;
+}
+
+.sk-carousel:active {
+  cursor: grabbing;
+}
+
+.sk-card {
+  flex-shrink: 0;
+
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+
+  padding: 20px 25px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+
+  min-width: 120px;
+
+  transition: transform 0.2s ease;
+}
+
+.sk-card:hover {
+  transform: translateY(-5px);
+}
+
+.sk-icon {
+  color: black;
+  font-size: 40px;
+}
+
+.sk-name {
+  color: black;
+  font-size: 16px;
+  font-weight: 600;
+}

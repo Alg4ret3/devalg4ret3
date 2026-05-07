@@ -79,22 +79,25 @@ export default function WelcomePage({
         ease: "power2.inOut",
         spin: targetLayout === "wp-final",
         simple: true,
-        onComplete: () => {
-          if (stopAfterNextFinal && targetLayout === "wp-final") {
-            const tl = gsap.timeline();
-            
-            tl.to(".wp-scroll-indicator", {
-              opacity: 1,
-              y: 0,
-              duration: 1.2,
-              ease: "power4.out",
-              onComplete: () => {
-                ScrollTrigger.refresh(); // Recalcula posiciones para el resto de la página
-                if (onAnimationComplete) onAnimationComplete();
-              }
-            });
-          }
-        },
+onComplete: () => {
+           if (stopAfterNextFinal && targetLayout === "wp-final") {
+             // Navbar appears immediately
+             if (onAnimationComplete) onAnimationComplete();
+             
+             const tl = gsap.timeline();
+             
+             // Scroll indicator appears after navbar
+             tl.to(".wp-scroll-indicator", {
+               opacity: 1,
+               y: 0,
+               duration: 1.2,
+               ease: "power4.out",
+               onComplete: () => {
+                 ScrollTrigger.refresh();
+               }
+             }, "+=0.3"); // Pequeño delay después del navbar
+           }
+         },
         onEnter: (elements) =>
           gsap.fromTo(
             elements,
