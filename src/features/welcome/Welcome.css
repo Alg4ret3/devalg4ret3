@@ -9,6 +9,9 @@
   top: 0;
   z-index: 1; 
   overflow: hidden;
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+  transform: translateZ(0);
 }
 
 .wp-container {
@@ -65,6 +68,8 @@
   padding: 2vmax 1vmax;
   margin-right: -1px;
   color: var(--brand-3);
+  will-change: transform, opacity, background-color, color;
+  backface-visibility: hidden;
 }
 
 .wp-container.wp-grid .wp-letter {

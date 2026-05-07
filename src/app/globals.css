@@ -21,12 +21,16 @@
 }
 
 /* REESTRUCTURACIÓN DE SCROLL PARA GSAP */
+html {
+  overflow-y: scroll; /* Fuerza la barra para evitar saltos de layout */
+  scrollbar-gutter: stable; /* Reserva el espacio de forma más moderna */
+}
+
 html,
 body {
   margin: 0;
   padding: 0;
   width: 100%;
-  /* Eliminamos height: 100% para que el scroll sea global */
   background-color: var(--bg-main);
   color: #1a1a1a;
   font-family: var(--font-sans);
@@ -72,16 +76,17 @@ h1, h2, h3, h4, h5, h6 {
 
 /* ── Custom Minimalist Scrollbar ── */
 ::-webkit-scrollbar {
-  width: 6px;
+  width: 10px; /* Más ancha */
 }
 
 ::-webkit-scrollbar-track {
-  background: transparent;
+  background: #f1f1f1; /* Fondo ligero para la pista */
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(0, 0, 0, 0.3); /* Un poco más oscuro para mayor visibilidad */
-  border-radius: 20px;
+  background: #888; /* Color gris sólido */
+  border-radius: 5px;
+  border: 2px solid #f1f1f1; /* Espacio alrededor del thumb */
 }
 
 ::-webkit-scrollbar-thumb:hover {

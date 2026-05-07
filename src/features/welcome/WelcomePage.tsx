@@ -45,6 +45,16 @@ export default function WelcomePage({
     container.classList.remove("wp-final");
     container.classList.add("wp-plain");
 
+    // 1. Entrada inicial: Una a una desde la izquierda
+    gsap.from(".wp-letter", {
+      x: -150,
+      opacity: 0,
+      duration: 1,
+      stagger: 0.1,
+      ease: "power3.out",
+      force3D: true,
+    });
+
     function nextState() {
       const state = Flip.getState(".wp-letter", {
         props: "color,backgroundColor",
@@ -99,7 +109,8 @@ export default function WelcomePage({
       }
     }
 
-    gsap.delayedCall(1, nextState);
+    // Retrasamos la secuencia de layouts para que dé tiempo a la entrada inicial
+    gsap.delayedCall(2.2, nextState);
   }, { dependencies: [displayName, isMounted], scope: containerRef }); // Quitamos isFinished de aquí
 
   // HOOK 2: Efecto de Blur y Pinning al hacer Scroll
@@ -107,10 +118,11 @@ export default function WelcomePage({
     if (!isFinished || !containerRef.current) return;
 
     gsap.to(containerRef.current, {
-      filter: "blur(20px)",
       opacity: 0,
-      scale: 0.9,
-      ease: "none",
+      scale: 0.8,
+      y: -100,
+      ease: "power1.inOut",
+      force3D: true,
       scrollTrigger: {
         trigger: containerRef.current,
         start: "top top",
