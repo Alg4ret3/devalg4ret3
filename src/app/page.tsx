@@ -1,17 +1,16 @@
 "use client";
 
-import { useState, useCallback, useEffect } from "react";
+import { useState, useCallback } from "react";
 import dynamic from "next/dynamic";
 import WelcomePage from "@/features/welcome/WelcomePage";
 import { Navbar } from "@/components/layout/navbar/Navbar";
+import { Footer } from "@/components/layout/footer/Footer";
+import { useScrollLock } from "@/hooks/useScrollLock";
+import { ProjectsGallery } from "@/features/projects";
 
 // Dynamic imports para optimizar el bundle (Lazy loading de componentes pesados)
 const TextShowcase = dynamic(() => import("@/features/text-showcase/TextShowcase").then(mod => mod.TextShowcase), { ssr: false });
-import { Footer } from "@/components/layout/footer/Footer";
 const WhatsAppButton = dynamic(() => import("@/features/whatsapp/WhatsAppButton").then(mod => mod.WhatsAppButton), { ssr: false });
-
-
-import { useScrollLock } from "@/hooks/useScrollLock";
 
 export default function Home() {
   const [isFinished, setIsFinished] = useState(false);
@@ -30,7 +29,12 @@ export default function Home() {
          isFinished={isFinished} 
        />
        <div className="section-container">
-         <TextShowcase />
+         <div id="showcase-wrapper">
+           <TextShowcase isFinished={isFinished} />
+         </div>
+         <div id="gallery-wrapper">
+           <ProjectsGallery isFinished={isFinished} />
+         </div>
        </div>
        {isFinished && <Footer />}
        <WhatsAppButton />

@@ -22,8 +22,8 @@
 
 /* REESTRUCTURACIÓN DE SCROLL PARA GSAP */
 html {
-  overflow-y: scroll; /* Fuerza la barra para evitar saltos de layout */
-  scrollbar-gutter: stable; /* Reserva el espacio de forma más moderna */
+  overflow-y: auto; 
+  scrollbar-gutter: stable; 
 }
 
 html,
@@ -51,7 +51,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .gl-no-scroll {
-  overflow-y: scroll !important; /* Mantiene la barra visible pero bloqueada */
+  overflow-y: hidden !important; 
   height: 100vh !important;
 }
 

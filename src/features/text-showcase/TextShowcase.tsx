@@ -11,11 +11,11 @@ if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
 }
 
-export const TextShowcase = () => {
+export const TextShowcase = ({ isFinished }: { isFinished?: boolean }) => {
   const containerRef = useRef<HTMLElement>(null);
 
   useGSAP(() => {
-    if (!containerRef.current) return;
+    if (!containerRef.current || !isFinished) return;
 
     const mm = gsap.matchMedia();
     
@@ -66,7 +66,7 @@ export const TextShowcase = () => {
       mm.revert();
       clearTimeout(timer);
     };
-  }, { scope: containerRef });
+  }, { scope: containerRef, dependencies: [isFinished] });
 
   return <ShowcaseList ref={containerRef} />;
 };
