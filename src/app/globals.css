@@ -16,6 +16,13 @@
   /* Color de Fondo */
   --bg-main: #ffffff;
 
+  /* Text Colors */
+  --text-primary: #212529;
+  --text-secondary: #6C757D;
+
+  /* Accent Color */
+  --accent: #007bff;
+
   --font-sans: "Inter", sans-serif;
   --font-display: "Montserrat", sans-serif;
 }
