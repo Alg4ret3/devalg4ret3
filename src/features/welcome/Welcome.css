@@ -1,0 +1,213 @@
+.wp-section {
+  width: 100%;
+  height: 100vh;
+  background-color: var(--bg-main);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative; /* Cambiado a relativo, GSAP se encargará del bloqueo */
+  top: 0;
+  z-index: 1; 
+  overflow: hidden;
+}
+
+.wp-container {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  max-width: none;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  position: relative;
+}
+
+.wp-container.wp-plain {
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.wp-container.wp-grid,
+.wp-container.wp-columns {
+  align-content: stretch;
+  align-items: stretch;
+  flex-wrap: wrap;
+}
+
+.wp-container.wp-final {
+  flex-wrap: wrap;
+  justify-content: center;
+  align-content: center;
+  gap: 20px 0;
+}
+
+.wp-container.wp-final .wp-mobile-break {
+  display: block;
+  width: 100%;
+  height: 0;
+}
+
+.wp-mobile-break {
+  display: none;
+}
+
+/* Letras - Estilos Base (Mobile) */
+.wp-letter {
+  text-align: center;
+  font-size: 15vw;
+  font-family: var(--font-display);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2vmax 1vmax;
+  margin-right: -1px;
+  color: var(--brand-3);
+}
+
+.wp-container.wp-grid .wp-letter {
+  flex-basis: 50%;
+  height: 33.333%;
+}
+
+.wp-container.wp-columns {
+  flex-direction: column;
+}
+
+.wp-container.wp-columns .wp-letter {
+  flex: 1;
+  width: 100%;
+  height: auto;
+}
+
+/* Texto Adicional - Estilos Base (Mobile) */
+.wp-info-text {
+  position: absolute;
+  top: 15%;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 4vw;
+  font-family: var(--font-sans);
+  color: var(--brand-9);
+  opacity: 0;
+  pointer-events: none;
+  white-space: nowrap;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-weight: 500;
+  z-index: 20;
+}
+
+/* Colores Base (Mobile) */
+.wp-L1 { background: var(--brand-3); color: var(--brand-9); }
+.wp-L2 { background: var(--brand-4); color: var(--brand-9); }
+.wp-L3 { background: var(--brand-5); color: var(--brand-9); }
+.wp-L4 { background: var(--brand-7); color: white; }
+.wp-L5 { background: var(--brand-8); color: white; }
+.wp-L6 { background: var(--brand-9); color: white; }
+
+/* ──────── Desktop Overrides (> 768px) ──────── */
+@media (min-width: 769px) {
+  .wp-letter {
+    font-size: 8vmax;
+  }
+
+  .wp-container.wp-grid .wp-letter {
+    flex-basis: 25%;
+    height: 50%;
+  }
+
+  .wp-container.wp-columns {
+    flex-direction: row;
+  }
+
+  .wp-container.wp-columns .wp-letter {
+    height: 100%;
+  }
+
+  .wp-info-text {
+    font-size: 0.65rem;
+    top: 22%;
+    letter-spacing: 0.4em;
+    opacity: 0.6;
+    font-weight: 400;
+  }
+
+  .wp-L1 { background: var(--brand-2); color: var(--brand-9); }
+  .wp-L2 { background: var(--brand-3); color: var(--brand-9); }
+  .wp-L3 { background: var(--brand-4); color: var(--brand-9); }
+  .wp-L4 { background: var(--brand-5); color: var(--brand-9); }
+  .wp-L5 { background: var(--brand-6); color: white; }
+  .wp-L6 { background: var(--brand-7); color: white; }
+  .wp-L7 { background: var(--brand-8); color: white; }
+  .wp-L8 { background: var(--brand-9); color: white; }
+}
+
+/* Elementos comunes (Scroll Indicators) */
+.wp-scroll-indicator {
+  position: absolute;
+  bottom: 30px;
+  left: 0;
+  width: 100%;
+  display: flex;
+  box-sizing: border-box;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  color: var(--brand-8);
+  font-family: var(--font-sans);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  font-size: 0.7rem;
+  pointer-events: none;
+  opacity: 0.8;
+  text-align: center;
+  z-index: 10;
+  padding: 0 20px;
+}
+
+.wp-scroll-indicator p { margin: 0; }
+
+.wp-scroll-line-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50px;
+  margin-top: 8px;
+}
+
+.wp-scroll-line {
+  width: 2px;
+  height: 100%;
+  background-color: var(--brand-3, #ccc);
+  position: relative;
+  overflow: hidden;
+  border-radius: 2px;
+}
+
+.wp-scroll-dot {
+  position: absolute;
+  top: -50%;
+  left: 0;
+  width: 100%;
+  height: 40%;
+  background-color: var(--brand-8, #333);
+  border-radius: 2px;
+  animation: wp-scroll-down-anim 1.5s infinite cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+@keyframes wp-scroll-down-anim {
+  0% { top: -50%; }
+  100% { top: 100%; }
+}
+
+.wp-container.wp-plain .wp-letter {
+  background: transparent !important;
+  color: var(--brand-9) !important;
+  padding: 0;
+  flex-basis: auto;
+  height: auto;
+}

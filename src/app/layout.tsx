@@ -1,36 +1,21 @@
 import type { Metadata } from "next";
-import { Inter, Geist_Mono } from "next/font/google";
-import { LanguageProvider } from "./context/LanguageContext";
+import { Inter, Montserrat } from "next/font/google";
 import "./globals.css";
+import { SmoothScroll } from "@/components/layout/SmoothScroll";
 
 const inter = Inter({
-  variable: "--font-inter",
+  variable: "--font-sans",
   subsets: ["latin"],
-  display: "swap",
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const montserrat = Montserrat({
+  variable: "--font-display",
   subsets: ["latin"],
-  display: "swap",
 });
 
 export const metadata: Metadata = {
-  title: "Sergio Muñoz | Computer Engineer & Full Stack Developer",
-  description:
-    "Portfolio of Sergio Muñoz, Computer Engineer specialized in React, Node.js and High Performance Animations.",
-  openGraph: {
-    title: "Sergio Muñoz | Computer Engineer",
-    description: "Portfolio specialized in high-performance web development and AI integration.",
-    url: "https://sergiomunoz.dev",
-    siteName: "Sergio Muñoz Portfolio",
-    locale: "es_ES",
-    type: "website",
-  },
-  robots: {
-    index: true,
-    follow: true,
-  }
+  title: "Alg4ret3 | Full Stack Developer",
+  description: "Creative Full Stack Developer Portfolio",
 };
 
 export default function RootLayout({
@@ -39,9 +24,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="es" className={`${inter.variable} ${geistMono.variable}`}>
-      <body>
-        <LanguageProvider>{children}</LanguageProvider>
+    <html lang="en">
+      <body className={`${inter.variable} ${montserrat.variable}`}>
+        <SmoothScroll>
+          {children}
+        </SmoothScroll>
       </body>
     </html>
   );
