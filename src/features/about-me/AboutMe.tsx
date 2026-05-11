@@ -11,32 +11,21 @@ if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
 }
 
+
+
 export const AboutMe = () => {
   const sectionRef = useRef<HTMLElement>(null);
   const textRef = useRef<HTMLDivElement>(null);
-  const imageRef = useRef<HTMLDivElement>(null);
 
   useGSAP(() => {
     const ctx = gsap.context(() => {
-      // Animación de entrada para el texto
-      gsap.from(".am-title, .am-description", {
+      // Animación de entrada para el texto solamente
+      gsap.from(".am-label, .am-title, .am-description, .am-stat-item", {
         y: 40,
         opacity: 0,
         duration: 1,
-        stagger: 0.2,
+        stagger: 0.1,
         ease: "power3.out",
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top 80%",
-        }
-      });
-
-      // Animación de entrada para la imagen (paralaje suave)
-      gsap.from(imageRef.current, {
-        scale: 1.1,
-        opacity: 0,
-        duration: 1.5,
-        ease: "power2.out",
         scrollTrigger: {
           trigger: sectionRef.current,
           start: "top 80%",
@@ -48,27 +37,44 @@ export const AboutMe = () => {
   }, []);
 
   return (
-    <section className="am-section" ref={sectionRef} id="about">
+    <section className="am-section" ref={sectionRef}>
       <div className="am-container">
         <div className="am-content" ref={textRef}>
           <span className="am-label">WHO I AM</span>
-          <h2 className="am-title">SERGIO <br /> RUIZ</h2>
+          <h2 className="am-title">SERGIO <br /> MUÑOZ</h2>
           <p className="am-description">
-            Creative Developer & Digital Architect based in Colombia. 
-            I craft high-end digital experiences where code meets design, 
-            focusing on performance, interaction, and minimalist aesthetics.
+            Hello, I'm Sergio Muñoz, a Computer Engineer based in Colombia. My profile 
+            leans heavily towards Frontend development, where I specialize in crafting 
+            minimalist websites with rich, fluid animations that create unique digital 
+            experiences. However, I am equally proficient in Backend development, 
+            ensuring robust logic and performance. Having graduated less than a year 
+            ago and holding my professional license, I am a passionate team player 
+            who excels at listening and contributing creative ideas to solve complex problems.
           </p>
+
+          <div className="am-stats">
+            <div className="am-stat-item">
+              <span className="am-stat-num">02+</span>
+              <span className="am-stat-label">Years of Experience</span>
+            </div>
+            <div className="am-stat-item">
+              <span className="am-stat-num">10+</span>
+              <span className="am-stat-label">Projects Delivered</span>
+            </div>
+          </div>
+
           <div className="am-footer-line" />
         </div>
 
-        <div className="am-image-wrapper" ref={imageRef}>
+        <div className="am-image-wrapper">
           <div className="am-image-inner">
             <Image
-              src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=2000&auto=format&fit=crop"
-              alt="Sergio Ruiz"
+              src="https://res.cloudinary.com/dqky6oqrd/image/upload/f_auto,q_auto/v1774646685/eitwnqy6zyvvvgfyqeid.webp"
+              alt="Sergio Muñoz"
               fill
               className="am-photo"
               sizes="(max-width: 768px) 100vw, 40vw"
+              priority
             />
           </div>
         </div>

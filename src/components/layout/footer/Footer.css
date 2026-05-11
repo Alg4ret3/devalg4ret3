@@ -25,7 +25,7 @@
 }
 
 .ft-social-link {
-  color: rgba(255, 255, 255, 0.3) !important;
+  color: rgb(255, 255, 255) !important;
   font-size: 1.2rem;
   transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
   display: flex;
@@ -35,7 +35,7 @@
 }
 
 .ft-social-link svg {
-  fill: rgba(255, 255, 255, 0.3) !important;
+  fill: rgb(255, 255, 255) !important;
   width: 1.2rem;
   height: 1.2rem;
   transition: fill 0.5s ease;
@@ -62,7 +62,7 @@
 .ft-line {
   flex-grow: 1;
   height: 1px;
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: rgb(255, 255, 255);
   max-width: 100px;
 }
 
@@ -71,7 +71,7 @@
   font-size: 0.65rem;
   font-weight: 400;
   letter-spacing: 0.4em;
-  color: rgba(255, 255, 255, 0.2);
+  color: rgb(255, 255, 255);
   text-transform: uppercase;
   margin: 0;
   white-space: nowrap;

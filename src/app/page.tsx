@@ -8,7 +8,7 @@ import { Footer } from "@/components/layout/footer/Footer";
 import { useScrollLock } from "@/hooks/useScrollLock";
 import { ProjectsGallery } from "@/features/projects";
 import { Skills } from "@/features/skills/Skills";
-import { AboutMe } from "@/features/about-me";
+import { AboutMe, LifeGallery } from "@/features/about-me";
 import { GitHubGraph } from "@/features/github/GitHubGraph";
 
 const TextShowcase = dynamic(() => import("@/features/text-showcase/TextShowcase").then(mod => mod.TextShowcase), { ssr: false });
@@ -46,7 +46,10 @@ export default function Home() {
         <div id="gallery-wrapper">
           <ProjectsGallery isFinished={isFinished} />
         </div>
-        <AboutMe />
+        <div id="about">
+          <AboutMe />
+          <LifeGallery />
+        </div>
 
       </div>
       {isFinished && <Footer />}

@@ -33,8 +33,12 @@ export const ProjectsGallery = ({ isFinished }: { isFinished?: boolean }) => {
         ease: "back.out(1.7)"
       });
 
-      // Super Animated Swipe Hint (GSAP Timeline)
-      const arrowTl = gsap.timeline({ repeat: -1 });
+      // Super Animated Swipe Hint (GSAP Timeline) - Optimized to only run when visible
+      const arrowTl = gsap.timeline({ 
+        repeat: -1,
+        paused: true 
+      });
+      
       arrowTl
         .to(".pg-swipe-hint svg", { 
           x: 40, 
@@ -57,6 +61,13 @@ export const ProjectsGallery = ({ isFinished }: { isFinished?: boolean }) => {
           yoyo: true, 
           repeat: 1 
         });
+
+      ScrollTrigger.create({
+        trigger: sectionRef.current,
+        start: "top bottom",
+        end: "bottom top",
+        onToggle: self => self.isActive ? arrowTl.play() : arrowTl.pause()
+      });
 
       const mm = gsap.matchMedia();
 

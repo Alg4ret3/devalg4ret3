@@ -3,7 +3,7 @@ import { TEXT_SHOWCASE_DATA } from "@/constants";
 import { ShowcaseTitle } from "../atoms/ShowcaseTitle";
 
 export const ShowcaseList = forwardRef<HTMLElement>((_, ref) => (
-  <section className="ts-section" id="about" ref={ref}>
+  <section className="ts-section" ref={ref}>
     <div className="ts-container">
       {TEXT_SHOWCASE_DATA.map((item) => (
         <ShowcaseTitle 

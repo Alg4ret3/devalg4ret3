@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import Link from "next/link";
 import { CV_PATH } from "@/constants";
 import "./Navbar.css";
 
@@ -10,16 +11,7 @@ interface NavbarProps {
 
 export const Navbar = ({ isVisible }: NavbarProps) => {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [view, setView] = useState<"main" | "tech">("main");
   const menuRef = useRef<HTMLDivElement>(null);
-
-  // Reset view when menu closes
-  useEffect(() => {
-    if (!menuOpen) {
-      const timer = setTimeout(() => setView("main"), 300);
-      return () => clearTimeout(timer);
-    }
-  }, [menuOpen]);
 
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
@@ -34,6 +26,8 @@ export const Navbar = ({ isVisible }: NavbarProps) => {
   const handleDownloadCV = () => {
     window.open(CV_PATH, "_blank");
   };
+
+  const closeMenu = () => setMenuOpen(false);
 
   return (
     <nav className={`nb-nav ${isVisible ? "nb-visible" : ""}`} ref={menuRef}>
@@ -63,41 +57,18 @@ export const Navbar = ({ isVisible }: NavbarProps) => {
 
       {/* ── Dropdown ── */}
       <div className={`nb-dropdown ${menuOpen ? "nb-dropdown--open" : ""}`}>
-        {view === "main" ? (
-          <>
-            <button
-              className="nb-dropdown-link"
-              onClick={() => {
-                setMenuOpen(false);
-                window.scrollTo({ top: 0, behavior: "smooth" });
-              }}
-            >
-              Home
-            </button>
-            <button className="nb-dropdown-link" onClick={() => setView("tech")}>
-              Technologies
-            </button>
-            <a href="#projects" className="nb-dropdown-link" onClick={() => setMenuOpen(false)}>
-              Projects
-            </a>
-            <a href="#about" className="nb-dropdown-link" onClick={() => setMenuOpen(false)}>
-              About me
-            </a>
-          </>
-        ) : (
-          <>
-            <button className="nb-dropdown-link nb-back" onClick={() => setView("main")} aria-label="Back">
-              ←
-            </button>
-            <div className="nb-divider"></div>
-            <a href="#frontend" className="nb-dropdown-link" onClick={() => setMenuOpen(false)}>
-              Frontend
-            </a>
-            <a href="#backend" className="nb-dropdown-link" onClick={() => setMenuOpen(false)}>
-              Backend
-            </a>
-          </>
-        )}
+        <Link href="#home" className="nb-dropdown-link" onClick={closeMenu}>
+          Home
+        </Link>
+        <Link href="#skills" className="nb-dropdown-link" onClick={closeMenu}>
+          Skills
+        </Link>
+        <Link href="#projects" className="nb-dropdown-link" onClick={closeMenu}>
+          Projects
+        </Link>
+        <Link href="#about" className="nb-dropdown-link" onClick={closeMenu}>
+          About me
+        </Link>
       </div>
 
     </nav>

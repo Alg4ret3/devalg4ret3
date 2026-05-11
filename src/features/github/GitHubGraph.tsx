@@ -26,7 +26,7 @@ export const GitHubGraph = () => {
     const days: Day[] = [];
     const now = new Date();
     now.setHours(0, 0, 0, 0); // Normalizar fecha
-    
+
     const pseudoRandom = (s: number) => {
       const x = Math.sin(s) * 10000;
       return x - Math.floor(x);
@@ -35,15 +35,15 @@ export const GitHubGraph = () => {
     for (let i = 0; i < 364; i++) {
       const d = new Date(now);
       d.setDate(now.getDate() - (363 - i));
-      
+
       const seed = i + 123;
       const isWeekend = d.getDay() === 0 || d.getDay() === 6;
       const rand = pseudoRandom(seed);
       const hasActivity = rand > 0.2;
-      const count = hasActivity 
-        ? Math.floor(pseudoRandom(seed + 1) * (isWeekend ? 3 : 10)) 
+      const count = hasActivity
+        ? Math.floor(pseudoRandom(seed + 1) * (isWeekend ? 3 : 10))
         : 0;
-      
+
       days.push({
         count,
         date: d.toISOString().split("T")[0],
@@ -69,9 +69,9 @@ export const GitHubGraph = () => {
       // Animar COLUMNAS en lugar de 364 cuadritos individuales
       gsap.fromTo(
         ".gh-week",
-        { 
+        {
           y: 10,
-          opacity: 0 
+          opacity: 0
         },
         {
           y: 0,
@@ -103,13 +103,13 @@ export const GitHubGraph = () => {
     <section className="gh-section" ref={containerRef}>
       <div className="gh-header">
         <div className="gh-title-group">
-          <h3 className="gh-title">Code Activity</h3>
-          <p className="gh-subtitle">GitHub contributions over the last year</p>
+          <h3 className="gh-title">Activity</h3>
+          <p className="gh-subtitle">Commit History</p>
         </div>
         <div className="gh-stats">
           <div className="gh-stat-item">
             <span className="gh-stat-value">2,482</span>
-            <span className="gh-stat-label">Commits</span>
+            <span className="gh-stat-label">Total Commits</span>
           </div>
         </div>
       </div>
@@ -128,7 +128,7 @@ export const GitHubGraph = () => {
             </div>
           ))}
         </div>
-        
+
         <div className="gh-legend">
           <span>Less</span>
           <div className="gh-legend-squares">
