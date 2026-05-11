@@ -3,71 +3,112 @@
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { Draggable } from "gsap/Draggable";
-import { skills } from "./skillsData";
+import { skillCategories, radarCategories } from "./skillsData";
+import { SkillRadar } from "./SkillRadar";
 import "./Skills.css";
 
-gsap.registerPlugin(ScrollTrigger, Draggable);
+gsap.registerPlugin(ScrollTrigger);
+
+// Flatten ticker: fila 1 = primera categoría, fila 2 = segunda
+const row1 = skillCategories[0].skills;
+const row2 = skillCategories[1].skills;
 
 export const Skills = () => {
-  const carouselRef = useRef<HTMLDivElement>(null);
+  const sectionRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
-    if (!carouselRef.current) return;
+    const section = sectionRef.current;
+    if (!section) return;
 
-    const carousel = carouselRef.current;
-
-    let scrollTrigger: ScrollTrigger | null = null;
-
-    const createScrollTrigger = () => {
-      scrollTrigger = ScrollTrigger.create({
-        trigger: document.body,
-        start: "top bottom",
-        end: "bottom top",
-        scrub: 1,
-        onUpdate: (self) => {
-          const progress = self.progress;
-          gsap.set(carousel, { x: - (carousel.offsetWidth / 2) * progress });
-        },
-      });
-    };
-
-    gsap.set(carousel, { x: 0 });
-
-    createScrollTrigger();
-
-    // hacer draggable con inercia
-    Draggable.create(carousel, {
-      type: "x",
-      inertia: true,
-      bounds: { minX: -carousel.offsetWidth / 2, maxX: 0 },
-      edgeResistance: 0.5,
-      onDragStart: () => {
-        if (scrollTrigger) {
-          scrollTrigger.kill();
-          scrollTrigger = null;
+    const ctx = gsap.context(() => {
+      // ── Título ──
+      gsap.fromTo(
+        ".sk-title",
+        { y: 36, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 0.8,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: ".sk-title",
+            start: "top 88%",
+            toggleActions: "play none none reverse",
+          },
         }
-      },
-      onDragEnd: () => {
-        createScrollTrigger();
-      },
-    });
+      );
 
-    return () => {
-      Draggable.get(carousel)?.kill();
-      ScrollTrigger.killAll();
-    };
+      // ── Ticker rows fade in ──
+      gsap.fromTo(
+        ".sk-ticker-row",
+        { opacity: 0, y: 16 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.7,
+          ease: "power2.out",
+          stagger: 0.12,
+          scrollTrigger: {
+            trigger: ".sk-ticker-row",
+            start: "top 82%",
+            toggleActions: "play none none reverse",
+          },
+        }
+      );
+
+      // ── Radar section title ──
+      gsap.fromTo(
+        ".sk-radar-section-title",
+        { y: 30, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 0.7,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: ".sk-radar-section-title",
+            start: "top 88%",
+            toggleActions: "play none none reverse",
+          },
+        }
+      );
+    }, section);
+
+    return () => ctx.revert();
   }, []);
 
+  const renderItems = (skills: typeof row1) =>
+    [...skills, ...skills].map((skill, i) => (
+      <div className="sk-ticker-item" key={i} aria-hidden={i >= skills.length}>
+        <span className="sk-ticker-icon">{skill.icon}</span>
+        <span className="sk-ticker-name">{skill.name}</span>
+        <span className="sk-ticker-dot" aria-hidden="true">·</span>
+      </div>
+    ));
+
   return (
-    <section className="sk-section">
-      <div className="sk-carousel-wrapper">
-        <div className="sk-carousel" ref={carouselRef}>
-          {[...skills, ...skills].map((skill, index) => (
-            <div className="sk-card" key={index}>
-              <span className="sk-icon">{skill.icon}</span>
-              <span className="sk-name">{skill.name}</span>
-            </div>
+    <section className="sk-section" ref={sectionRef} id="skills">
+      {/* ── Título ── */}
+      <h2 className="sk-title">Skills & Technologies</h2>
+
+      {/* ── Ticker ── */}
+      <div className="sk-ticker-row">
+        <div className="sk-ticker-track sk-ticker-track--left">
+          {renderItems(row1)}
+        </div>
+      </div>
+      <div className="sk-ticker-row">
+        <div className="sk-ticker-track sk-ticker-track--right">
+          {renderItems(row2)}
+        </div>
+      </div>
+
+      {/* ── Radar charts ── */}
+      <div className="sk-radar-section">
+        <p className="sk-radar-section-title">Nivel de dominio</p>
+        <div className="sk-radar-grid">
+          {radarCategories.map((cat, i) => (
+            <SkillRadar key={cat.label} category={cat} index={i} />
           ))}
         </div>
       </div>
