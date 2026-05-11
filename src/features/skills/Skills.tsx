@@ -9,7 +9,7 @@ import "./Skills.css";
 
 gsap.registerPlugin(ScrollTrigger);
 
-// Flatten ticker: fila 1 = primera categoría, fila 2 = segunda
+// Flatten ticker: row 1 = first category, row 2 = second
 const row1 = skillCategories[0].skills;
 const row2 = skillCategories[1].skills;
 
@@ -21,7 +21,7 @@ export const Skills = () => {
     if (!section) return;
 
     const ctx = gsap.context(() => {
-      // ── Título ──
+      // ── Title ──
       gsap.fromTo(
         ".sk-title",
         { y: 36, opacity: 0 },
@@ -88,8 +88,11 @@ export const Skills = () => {
 
   return (
     <section className="sk-section" ref={sectionRef} id="skills">
-      {/* ── Título ── */}
-      <h2 className="sk-title">Skills & Technologies</h2>
+      {/* ── Minimalist Title ── */}
+      <div className="sk-header">
+        <span className="sk-label">02. KNOWLEDGE</span>
+        <h2 className="sk-title">EXPERTISE</h2>
+      </div>
 
       {/* ── Ticker ── */}
       <div className="sk-ticker-row">
@@ -105,7 +108,7 @@ export const Skills = () => {
 
       {/* ── Radar charts ── */}
       <div className="sk-radar-section">
-        <p className="sk-radar-section-title">Nivel de dominio</p>
+        <p className="sk-radar-section-title">Mastery Level</p>
         <div className="sk-radar-grid">
           {radarCategories.map((cat, i) => (
             <SkillRadar key={cat.label} category={cat} index={i} />

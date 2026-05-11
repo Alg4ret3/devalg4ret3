@@ -2,7 +2,7 @@ import {
   SiHtml5, SiCss, SiJavascript, SiTypescript,
   SiReact, SiNextdotjs, SiGsap, SiThreedotjs, SiAstro, SiVite,
   SiNodedotjs, SiNestjs, SiFastapi, SiPython,
-  SiGit, SiDocker,
+  SiGit, SiDocker, SiPostgresql, SiMysql, SiSvelte
 } from "react-icons/si";
 
 export interface Skill {
@@ -30,6 +30,7 @@ export const skillCategories: SkillCategory[] = [
       { icon: <SiNextdotjs />,  name: "Next.js"     },
       { icon: <SiGsap />,       name: "GSAP"        },
       { icon: <SiThreedotjs />, name: "Three.js"    },
+      { icon: <SiSvelte />,     name: "Svelte"      },
     ],
   },
   {
@@ -44,6 +45,7 @@ export const skillCategories: SkillCategory[] = [
       { icon: <SiPython />,     name: "Python"      },
       { icon: <SiGit />,        name: "Git"         },
       { icon: <SiDocker />,     name: "Docker"      },
+      { icon: <SiMysql />,      name: "MySQL"       },
     ],
   },
 ];
@@ -61,33 +63,46 @@ export interface RadarCategory {
 
 export const radarCategories: RadarCategory[] = [
   {
-    label: "Frontend Core",
+    label: "Frontend & Animation",
     skills: [
-      { name: "HTML5",      level: 0.97 },
-      { name: "CSS3",       level: 0.95 },
-      { name: "JavaScript", level: 0.92 },
-      { name: "TypeScript", level: 0.88 },
       { name: "React",      level: 0.90 },
+      { name: "Next.js",    level: 0.88 },
+      { name: "GSAP",       level: 0.95 },
+      { name: "Three.js",   level: 0.75 },
+      { name: "Astro",      level: 0.80 },
+      { name: "Svelte",     level: 0.70 },
+      { name: "Vite",       level: 0.95 },
     ],
   },
   {
-    label: "Frameworks",
+    label: "Backend & Database",
     skills: [
-      { name: "Next.js",  level: 0.88 },
-      { name: "Astro",    level: 0.75 },
-      { name: "GSAP",     level: 0.85 },
-      { name: "Three.js", level: 0.65 },
-      { name: "Vite",     level: 0.82 },
+      { name: "Node.js",    level: 0.85 },
+      { name: "NestJS",     level: 0.80 },
+      { name: "FastAPI",    level: 0.75 },
+      { name: "PostgreSQL", level: 0.82 },
+      { name: "MySQL",      level: 0.85 },
     ],
   },
   {
-    label: "Backend & Tools",
+    label: "Tools",
     skills: [
-      { name: "Node.js", level: 0.80 },
-      { name: "NestJS",  level: 0.72 },
-      { name: "FastAPI", level: 0.70 },
-      { name: "Python",  level: 0.75 },
-      { name: "Docker",  level: 0.65 },
+      { name: "Git",        level: 0.92 },
+      { name: "Docker",     level: 0.80 },
+      { name: "Vite",       level: 0.88 },
+      { name: "Vercel",     level: 0.85 },
+      { name: "Figma",      level: 0.70 },
+      { name: "n8n",        level: 0.70 },
+    ],
+  },
+  {
+    label: "Languages",
+    skills: [
+      { name: "JavaScript", level: 0.95 },
+      { name: "TypeScript", level: 0.92 },
+      { name: "Python",     level: 0.95 },
+      { name: "HTML5",      level: 0.98 },
+      { name: "CSS3",       level: 0.95 },
     ],
   },
 ];

@@ -12,22 +12,22 @@ interface Props {
   index: number;
 }
 
-const SIZE = 280;          // viewBox size — espacio extra para etiquetas
+const SIZE = 280;          // viewBox size — extra space for labels
 const CX = SIZE / 2;       // center x
 const CY = SIZE / 2;       // center y
 const R = 90;              // max radius
-const LEVELS = 4;          // anillos de guía
+const LEVELS = 4;          // guide rings
 
-/** Redondea a N decimales para evitar diferencias SSR/cliente */
+/** Rounds to N decimals to avoid SSR/client differences */
 const r4 = (n: number) => Math.round(n * 1e4) / 1e4;
 
-/** Calcula punto (x,y) en el polígono dado ángulo y radio */
+/** Calculates point (x,y) in the polygon given angle and radius */
 const polar = (angle: number, radius: number) => ({
   x: r4(CX + radius * Math.sin(angle)),
   y: r4(CY - radius * Math.cos(angle)),
 });
 
-/** Genera el string de puntos SVG para un polígono */
+/** Generates the SVG points string for a polygon */
 const polyPoints = (levels: number[], radius: number) =>
   levels
     .map((lvl, i) => {
@@ -45,13 +45,13 @@ export const SkillRadar = ({ category, index }: Props) => {
   const n = category.skills.length;
   const angles = Array.from({ length: n }, (_, i) => (2 * Math.PI * i) / n);
 
-  // Puntos del polígono relleno (niveles reales)
+  // Points of the filled polygon (actual levels)
   const filledPointsStr = polyPoints(
     category.skills.map((s) => s.level),
     R
   );
 
-  // Polígono máximo (nivel 1) para la guía exterior
+  // Outer polygon (level 1) for the exterior guide
   const outerPointsStr = polyPoints(Array(n).fill(1), R);
 
   useEffect(() => {
@@ -60,10 +60,10 @@ export const SkillRadar = ({ category, index }: Props) => {
     if (!svg || !filled) return;
 
     const ctx = gsap.context(() => {
-      // ── Polígono relleno: crece desde centro ──
+      // ── Filled polygon: grows from center ──
       gsap.fromTo(
         filled,
-        { scale: 0, transformOrigin: `${CX}px ${CY}px`, opacity: 0 }, // CX/CY se calcula en runtime
+        { scale: 0, transformOrigin: `${CX}px ${CY}px`, opacity: 0 }, // CX/CY is calculated at runtime
         {
           scale: 1,
           opacity: 1,
@@ -111,7 +111,7 @@ export const SkillRadar = ({ category, index }: Props) => {
         className="sk-radar-svg"
         aria-label={`Radar chart for ${category.label}`}
       >
-        {/* ── Anillos de guía ── */}
+        {/* ── Guide rings ── */}
         {Array.from({ length: LEVELS }).map((_, lvl) => {
           const ratio = (lvl + 1) / LEVELS;
           return (
@@ -123,7 +123,7 @@ export const SkillRadar = ({ category, index }: Props) => {
           );
         })}
 
-        {/* ── Ejes ── */}
+        {/* ── Axes ── */}
         {angles.map((angle, i) => {
           const outer = polar(angle, R);
           return (
@@ -136,17 +136,17 @@ export const SkillRadar = ({ category, index }: Props) => {
           );
         })}
 
-        {/* ── Polígono exterior (max) ── */}
+        {/* ── Outer polygon (max) ── */}
         <polygon points={outerPointsStr} className="sk-radar-outer" />
 
-        {/* ── Polígono relleno (niveles reales) ── */}
+        {/* ── Filled polygon (actual levels) ── */}
         <polygon
           ref={filledRef}
           points={filledPointsStr}
           className="sk-radar-filled"
         />
 
-        {/* ── Puntos en vértices rellenos ── */}
+        {/* ── Dots at filled vertices ── */}
         {category.skills.map((skill, i) => {
           const pt = polar(angles[i], R * skill.level);
           return (
@@ -160,12 +160,12 @@ export const SkillRadar = ({ category, index }: Props) => {
           );
         })}
 
-        {/* ── Etiquetas ── */}
+        {/* ── Labels ── */}
         {category.skills.map((skill, i) => {
           const LABEL_R = R + 32;
           const pt = polar(angles[i], LABEL_R);
 
-          // Anclar texto según posición
+          // Anchor text based on position
           let anchor: "middle" | "start" | "end" = "middle";
           if (pt.x < CX - 10) anchor = "end";
           if (pt.x > CX + 10) anchor = "start";

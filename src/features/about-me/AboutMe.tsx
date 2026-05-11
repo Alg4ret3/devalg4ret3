@@ -1,59 +1,76 @@
 "use client";
 
-import { useState } from "react";
+import React, { useRef } from "react";
+import Image from "next/image";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import "./AboutMe.css";
 
-const photos = [
-  "https://images.pexels.com/photos/1181671/pexels-photo-1181671.jpeg?auto=compress&cs=tinysrgb&w=600",
-  "https://images.pexels.com/photos/1181675/pexels-photo-1181675.jpeg?auto=compress&cs=tinysrgb&w=600",
-  "https://images.pexels.com/photos/1181467/pexels-photo-1181467.jpeg?auto=compress&cs=tinysrgb&w=600"
-];
+if (typeof window !== "undefined") {
+  gsap.registerPlugin(ScrollTrigger);
+}
 
 export const AboutMe = () => {
-  const [currentPhoto, setCurrentPhoto] = useState(0);
+  const sectionRef = useRef<HTMLElement>(null);
+  const textRef = useRef<HTMLDivElement>(null);
+  const imageRef = useRef<HTMLDivElement>(null);
 
-  const nextPhoto = () => {
-    setCurrentPhoto((prev) => (prev + 1) % photos.length);
-  };
+  useGSAP(() => {
+    const ctx = gsap.context(() => {
+      // Animación de entrada para el texto
+      gsap.from(".am-title, .am-description", {
+        y: 40,
+        opacity: 0,
+        duration: 1,
+        stagger: 0.2,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: "top 80%",
+        }
+      });
 
-  const prevPhoto = () => {
-    setCurrentPhoto((prev) => (prev - 1 + photos.length) % photos.length);
-  };
+      // Animación de entrada para la imagen (paralaje suave)
+      gsap.from(imageRef.current, {
+        scale: 1.1,
+        opacity: 0,
+        duration: 1.5,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: "top 80%",
+        }
+      });
+    }, sectionRef);
+
+    return () => ctx.revert();
+  }, []);
 
   return (
-    <section className="am-section">
-      <div className="about-container">
-        <div className="about-content">
-          <p className="about-text">
-            Full-stack developer focused on creating clean, efficient web applications.
-            Passionate about modern technologies and user experience.
+    <section className="am-section" ref={sectionRef} id="about">
+      <div className="am-container">
+        <div className="am-content" ref={textRef}>
+          <span className="am-label">WHO I AM</span>
+          <h2 className="am-title">SERGIO <br /> RUIZ</h2>
+          <p className="am-description">
+            Creative Developer & Digital Architect based in Colombia. 
+            I craft high-end digital experiences where code meets design, 
+            focusing on performance, interaction, and minimalist aesthetics.
           </p>
-
-          <div className="skills-list">
-            <span>React</span>
-            <span>TypeScript</span>
-            <span>Next.js</span>
-            <span>Node.js</span>
-          </div>
+          <div className="am-footer-line" />
         </div>
 
-        <div className="photo-carousel">
-          <div className="carousel-container">
-            {photos.map((photo, index) => (
-              <img
-                key={index}
-                src={photo}
-                alt=""
-                className={`carousel-slide ${index === currentPhoto ? 'active' : ''}`}
-              />
-            ))}
+        <div className="am-image-wrapper" ref={imageRef}>
+          <div className="am-image-inner">
+            <Image
+              src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=2000&auto=format&fit=crop"
+              alt="Sergio Ruiz"
+              fill
+              className="am-photo"
+              sizes="(max-width: 768px) 100vw, 40vw"
+            />
           </div>
-
-          <button className="carousel-btn prev" onClick={prevPhoto}>
-            ←
-          </button>
-          <button className="carousel-btn next" onClick={nextPhoto}>
-            →
-          </button>
         </div>
       </div>
     </section>

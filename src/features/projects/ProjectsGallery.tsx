@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useRef } from "react";
+import Image from "next/image";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
@@ -23,7 +24,7 @@ export const ProjectsGallery = ({ isFinished }: { isFinished?: boolean }) => {
       gsap.from(".pg-intro-text", {
         scrollTrigger: {
           trigger: ".pg-intro-text",
-          start: "top 85%", // Se activa cuando el texto entra en el 85% de la pantalla
+          start: "top 85%",
           toggleActions: "play none none none"
         },
         scale: 0.7,
@@ -59,7 +60,7 @@ export const ProjectsGallery = ({ isFinished }: { isFinished?: boolean }) => {
 
       const mm = gsap.matchMedia();
 
-      // Escritorio: Scroll Horizontal
+      // Escritorio: Scroll Horizontal Optimizado
       mm.add("(min-width: 769px)", () => {
         const wrapper = wrapperRef.current!;
         const scrollAmount = wrapper.scrollWidth - window.innerWidth;
@@ -67,6 +68,7 @@ export const ProjectsGallery = ({ isFinished }: { isFinished?: boolean }) => {
         gsap.to(wrapper, {
           x: -scrollAmount,
           ease: "none",
+          force3D: true, // Forzar aceleración GPU
           scrollTrigger: {
             trigger: sectionRef.current,
             pin: true,
@@ -103,7 +105,7 @@ export const ProjectsGallery = ({ isFinished }: { isFinished?: boolean }) => {
         </div>
 
         {/* Project Panels */}
-        {PROJECTS_DATA.map((project) => (
+        {PROJECTS_DATA.map((project, index) => (
           <div key={project.id} className="pg-panel pg-panel-split">
             <div className="pg-project-info">
               <span className="pg-id">{project.id}</span>
@@ -132,11 +134,14 @@ export const ProjectsGallery = ({ isFinished }: { isFinished?: boolean }) => {
               </div>
             </div>
             <div className="pg-image-container">
-              <img
+              <Image
                 src={project.image}
                 alt={project.title}
+                fill
+                sizes="(max-width: 768px) 100vw, 65vw"
                 className="pg-image"
-                loading="lazy"
+                priority={index === 0} // Prioridad a la primera imagen
+                quality={85}
               />
             </div>
           </div>

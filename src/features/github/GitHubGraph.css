@@ -1,0 +1,145 @@
+/* ══════════════════════════════════════════
+   GitHub Graph — Minimalist Style
+   ══════════════════════════════════════════ */
+
+.gh-section {
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 80px 24px;
+  background: var(--brand-1);
+}
+
+.gh-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 32px;
+}
+
+.gh-title {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+  margin: 0 0 4px;
+}
+
+.gh-subtitle {
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+.gh-stat-value {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 900;
+  color: var(--text-primary);
+  line-height: 1;
+}
+
+.gh-stat-label {
+  font-family: var(--font-sans);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-secondary);
+  font-weight: 600;
+}
+
+/* ── Graph Grid ── */
+.gh-graph-container {
+  width: 100%;
+  overflow-x: auto;
+  padding-bottom: 16px;
+  /* Hide scrollbar but keep functionality */
+  scrollbar-width: none;
+}
+
+.gh-graph-container::-webkit-scrollbar {
+  display: none;
+}
+
+.gh-grid {
+  display: flex;
+  gap: 4px;
+  width: max-content;
+}
+
+.gh-week {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  /* Optimización: decirle al navegador qué va a cambiar */
+  will-change: transform, opacity;
+}
+
+.gh-square {
+  width: 12px;
+  height: 12px;
+  border-radius: 2px;
+  transition: transform 0.2s ease, filter 0.2s ease;
+  cursor: pointer;
+  background-color: var(--brand-2);
+}
+
+.gh-square:hover {
+  transform: scale(1.4);
+  z-index: 10;
+  filter: brightness(0.8);
+}
+
+/* ── Monochromatic Levels ── */
+.level-0 { background-color: var(--brand-2); } /* Casi blanco */
+.level-1 { background-color: var(--brand-4); } /* Gris claro */
+.level-2 { background-color: var(--brand-6); } /* Gris medio */
+.level-3 { background-color: var(--brand-8); } /* Gris oscuro */
+.level-4 { background-color: var(--brand-9); } /* Negro */
+
+/* ── Legend ── */
+.gh-legend {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 16px;
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+}
+
+.gh-legend-squares {
+  display: flex;
+  gap: 3px;
+}
+
+.gh-legend-squares .gh-square {
+  width: 10px;
+  height: 10px;
+  cursor: default;
+}
+
+/* ══════════════════════════════════════════
+   RESPONSIVE
+   ══════════════════════════════════════════ */
+
+@media (max-width: 640px) {
+  .gh-section {
+    padding: 60px 20px;
+  }
+  
+  .gh-square {
+    width: 10px;
+    height: 10px;
+  }
+
+  .gh-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+  }
+}

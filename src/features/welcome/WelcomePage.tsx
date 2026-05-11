@@ -31,7 +31,7 @@ export default function WelcomePage({
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  // HOOK 1: Animación inicial de las letras (Flip)
+  // HOOK 1: Initial letter animation (Flip)
   useGSAP(() => {
     if (!isMounted || !displayName || !containerRef.current) return;
 
@@ -45,7 +45,7 @@ export default function WelcomePage({
     container.classList.remove("wp-final");
     container.classList.add("wp-plain");
 
-    // 1. Entrada inicial: Una a una desde la izquierda
+    // 1. Initial entrance: One by one from the left
     gsap.from(".wp-letter", {
       x: -150,
       opacity: 0,
@@ -79,7 +79,7 @@ export default function WelcomePage({
         ease: "power2.inOut",
         spin: targetLayout === "wp-final",
         simple: true,
-onComplete: () => {
+        onComplete: () => {
            if (stopAfterNextFinal && targetLayout === "wp-final") {
              // Navbar appears immediately
              if (onAnimationComplete) onAnimationComplete();
@@ -95,7 +95,7 @@ onComplete: () => {
                onComplete: () => {
                  ScrollTrigger.refresh();
                }
-             }, "+=0.3"); // Pequeño delay después del navbar
+             }, "+=0.3"); // Small delay after navbar
            }
          },
         onEnter: (elements) =>
@@ -112,11 +112,11 @@ onComplete: () => {
       }
     }
 
-    // Retrasamos la secuencia de layouts para que dé tiempo a la entrada inicial
+    // Delay the layout sequence to give time for initial entrance
     gsap.delayedCall(2.2, nextState);
-  }, { dependencies: [displayName, isMounted], scope: containerRef }); // Quitamos isFinished de aquí
+  }, { dependencies: [displayName, isMounted], scope: containerRef });
 
-  // HOOK 2: Efecto de Blur y Pinning al hacer Scroll
+  // HOOK 2: Blur and Pinning effect on Scroll
   useGSAP(() => {
     if (!isFinished || !containerRef.current) return;
 

@@ -9,15 +9,31 @@
   overflow: hidden;
 }
 
-/* ── Título ── */
+/* ── Minimalist Header ── */
+.sk-header {
+  padding: 0 24px;
+  margin-bottom: 60px;
+}
+
+.sk-label {
+  font-family: var(--font-sans);
+  font-size: 0.65rem;
+  font-weight: 500;
+  letter-spacing: 0.4em;
+  color: var(--text-secondary);
+  display: block;
+  margin-bottom: 12px;
+  opacity: 0.5;
+}
+
 .sk-title {
   font-family: var(--font-display);
-  font-size: clamp(1.6rem, 5vw, 2.8rem);
-  font-weight: 900;
-  letter-spacing: -0.03em;
+  font-size: clamp(2rem, 8vw, 4.5rem);
+  font-weight: 200;
+  letter-spacing: 0.15em;
   color: var(--text-primary);
-  margin: 0 0 52px;
-  padding: 0 24px;
+  margin: 0;
+  text-transform: uppercase;
 }
 
 /* ══════════════════════════════════════════
@@ -247,9 +263,9 @@
     padding: 110px 0 130px;
   }
 
-  .sk-title {
+  .sk-header {
     padding: 0 80px;
-    margin-bottom: 60px;
+    margin-bottom: 80px;
   }
 
   .sk-ticker-item {
@@ -267,10 +283,10 @@
   }
 
   .sk-radar-grid {
-    grid-template-columns: repeat(3, 1fr);
-    column-gap: 64px;
-    row-gap: 0;
-    max-width: 1100px;
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 80px;
+    row-gap: 64px;
+    max-width: 1000px;
     margin: 0 auto;
   }
 

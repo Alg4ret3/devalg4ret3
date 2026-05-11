@@ -9,6 +9,7 @@ import { useScrollLock } from "@/hooks/useScrollLock";
 import { ProjectsGallery } from "@/features/projects";
 import { Skills } from "@/features/skills/Skills";
 import { AboutMe } from "@/features/about-me";
+import { GitHubGraph } from "@/features/github/GitHubGraph";
 
 const TextShowcase = dynamic(() => import("@/features/text-showcase/TextShowcase").then(mod => mod.TextShowcase), { ssr: false });
 const WhatsAppButton = dynamic(() => import("@/features/whatsapp/WhatsAppButton").then(mod => mod.WhatsAppButton), { ssr: false });
@@ -41,6 +42,7 @@ export default function Home() {
           <TextShowcase isFinished={isFinished} />
         </div>
         <Skills />
+        <GitHubGraph />
         <div id="gallery-wrapper">
           <ProjectsGallery isFinished={isFinished} />
         </div>
