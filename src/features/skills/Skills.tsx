@@ -3,15 +3,15 @@
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { skillCategories, radarCategories } from "./skillsData";
+import { TICKER_SKILLS, RADAR_SKILLS } from "@/constants";
 import { SkillRadar } from "./SkillRadar";
 import "./Skills.css";
 
 gsap.registerPlugin(ScrollTrigger);
 
 // Flatten ticker: row 1 = first category, row 2 = second
-const row1 = skillCategories[0].skills;
-const row2 = skillCategories[1].skills;
+const row1 = TICKER_SKILLS[0].skills;
+const row2 = TICKER_SKILLS[1].skills;
 
 export const Skills = () => {
   const sectionRef = useRef<HTMLElement>(null);
@@ -110,7 +110,7 @@ export const Skills = () => {
       <div className="sk-radar-section">
         <p className="sk-radar-section-title">Mastery Level</p>
         <div className="sk-radar-grid">
-          {radarCategories.map((cat, i) => (
+          {RADAR_SKILLS.map((cat, i) => (
             <SkillRadar key={cat.label} category={cat} index={i} />
           ))}
         </div>

@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { CV_PATH } from "@/constants";
+import { CV_PATH, SOCIAL_LINKS, NAV_LINKS } from "@/constants";
 import "./Navbar.css";
 
 interface NavbarProps {
@@ -38,11 +38,9 @@ export const Navbar = ({ isVisible }: NavbarProps) => {
         onClick={() => setMenuOpen((v) => !v)}
         aria-label="Menu"
       >
-        <svg className="nb-ham-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-          <path className="nb-ham-line line--1" d="M0 40h62c13 0 6 28-4 18L35 35" />
-          <path className="nb-ham-line line--2" d="M0 50h70" />
-          <path className="nb-ham-line line--3" d="M0 60h62c13 0 6-28-4-18L35 65" />
-        </svg>
+        <div className="nb-ham-box">
+          <span className="nb-ham-inner"></span>
+        </div>
       </button>
 
       {/* ── CV ── */}
@@ -57,18 +55,35 @@ export const Navbar = ({ isVisible }: NavbarProps) => {
 
       {/* ── Dropdown ── */}
       <div className={`nb-dropdown ${menuOpen ? "nb-dropdown--open" : ""}`}>
-        <Link href="#home" className="nb-dropdown-link" onClick={closeMenu}>
-          Home
-        </Link>
-        <Link href="#skills" className="nb-dropdown-link" onClick={closeMenu}>
-          Skills
-        </Link>
-        <Link href="#projects" className="nb-dropdown-link" onClick={closeMenu}>
-          Projects
-        </Link>
-        <Link href="#about" className="nb-dropdown-link" onClick={closeMenu}>
-          About me
-        </Link>
+        <div className="nb-dropdown-main">
+          {NAV_LINKS.map((link) => (
+            <Link 
+              key={link.href} 
+              href={link.href} 
+              className="nb-dropdown-link" 
+              onClick={closeMenu}
+            >
+              {link.label}
+            </Link>
+          ))}
+        </div>
+
+        <div className="nb-dropdown-footer">
+          <div className="nb-social-group">
+            {SOCIAL_LINKS.map((link) => (
+              <a
+                key={link.id}
+                href={link.href}
+                className="nb-social-link"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={link.label}
+              >
+                <link.icon />
+              </a>
+            ))}
+          </div>
+        </div>
       </div>
 
     </nav>

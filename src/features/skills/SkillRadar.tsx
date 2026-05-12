@@ -1,9 +1,7 @@
-"use client";
-
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { RadarCategory } from "./skillsData";
+import { RadarCategory } from "@/constants";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -38,9 +36,11 @@ const polyPoints = (levels: number[], radius: number) =>
     .join(" ");
 
 export const SkillRadar = ({ category, index }: Props) => {
+  const wrapRef = useRef<HTMLDivElement>(null);
   const svgRef = useRef<SVGSVGElement>(null);
   const labelRefs = useRef<(SVGTextElement | null)[]>([]);
   const filledRef = useRef<SVGPolygonElement>(null);
+  const [clickedSkill, setClickedSkill] = useState<number | null>(null);
 
   const n = category.skills.length;
   const angles = Array.from({ length: n }, (_, i) => (2 * Math.PI * i) / n);
@@ -60,15 +60,15 @@ export const SkillRadar = ({ category, index }: Props) => {
     if (!svg || !filled) return;
 
     const ctx = gsap.context(() => {
-      // ── Filled polygon: grows from center ──
+      // ── Initial Entry Animation ──
       gsap.fromTo(
         filled,
-        { scale: 0, transformOrigin: `${CX}px ${CY}px`, opacity: 0 }, // CX/CY is calculated at runtime
+        { scale: 0, transformOrigin: `${CX}px ${CY}px`, opacity: 0 },
         {
           scale: 1,
           opacity: 1,
-          duration: 1.0,
-          ease: "power3.out",
+          duration: 1.2,
+          ease: "expo.out",
           delay: index * 0.15,
           scrollTrigger: {
             trigger: svg,
@@ -78,17 +78,18 @@ export const SkillRadar = ({ category, index }: Props) => {
         }
       );
 
-      // ── Labels: fade-in stagger ──
+      // Labels fade-in
       const labels = labelRefs.current.filter(Boolean);
       gsap.fromTo(
         labels,
-        { opacity: 0 },
+        { opacity: 0, y: 10 },
         {
           opacity: 1,
-          duration: 0.5,
-          stagger: 0.07,
+          y: 0,
+          duration: 0.6,
+          stagger: 0.05,
           ease: "power2.out",
-          delay: index * 0.15 + 0.4,
+          delay: index * 0.15 + 0.5,
           scrollTrigger: {
             trigger: svg,
             start: "top 85%",
@@ -96,13 +97,81 @@ export const SkillRadar = ({ category, index }: Props) => {
           },
         }
       );
-    }, svg);
+    }, wrapRef);
 
     return () => ctx.revert();
   }, [index]);
 
+  // ── INTERACTIONS ──
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (window.matchMedia("(pointer: coarse)").matches) return;
+    if (!wrapRef.current || !svgRef.current) return;
+
+    const { left, top, width, height } = wrapRef.current.getBoundingClientRect();
+    const x = e.clientX - left;
+    const y = e.clientY - top;
+
+    const rotateY = ((x - width / 2) / (width / 2)) * 12;
+    const rotateX = ((y - height / 2) / (height / 2)) * -12;
+
+    gsap.to(svgRef.current, {
+      rotateY,
+      rotateX,
+      duration: 0.5,
+      ease: "power2.out",
+      transformPerspective: 1000,
+    });
+  };
+
+  const handleMouseLeave = () => {
+    if (!wrapRef.current || !svgRef.current) return;
+    gsap.to(svgRef.current, {
+      rotateX: 0,
+      rotateY: 0,
+      duration: 0.6,
+      ease: "power3.out",
+    });
+  };
+
+  const handleSkillEnter = (i: number) => {
+    // Only animate dot if it's not the clicked one (or just do it anyway)
+    gsap.to(`.sk-dot-${index}-${i}`, { 
+      fill: "#000000", 
+      r: 6, 
+      duration: 0.25, 
+      ease: "back.out(2)" 
+    });
+  };
+
+  const handleSkillLeave = (i: number) => {
+    if (clickedSkill === i) return; // Keep it black/big if clicked
+    gsap.to(`.sk-dot-${index}-${i}`, { 
+      fill: "var(--text-primary)", 
+      r: 3, 
+      duration: 0.25 
+    });
+  };
+
+  const handleSkillClick = (i: number) => {
+    setClickedSkill(clickedSkill === i ? null : i);
+    
+    // If we click a new one, reset the visual of the previous one
+    if (clickedSkill !== null && clickedSkill !== i) {
+      gsap.to(`.sk-dot-${index}-${clickedSkill}`, { 
+        fill: "var(--text-primary)", 
+        r: 3, 
+        duration: 0.25 
+      });
+    }
+  };
+
   return (
-    <div className="sk-radar-wrap">
+    <div 
+      className="sk-radar-wrap"
+      ref={wrapRef}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+    >
       <span className="sk-radar-label">{category.label}</span>
 
       <svg
@@ -154,8 +223,13 @@ export const SkillRadar = ({ category, index }: Props) => {
               key={i}
               cx={pt.x}
               cy={pt.y}
-              r={3}
-              className="sk-radar-dot"
+              r={clickedSkill === i ? 6 : 3}
+              fill={clickedSkill === i ? "#000000" : "var(--text-primary)"}
+              className={`sk-radar-dot sk-dot-${index}-${i}`}
+              onMouseEnter={() => handleSkillEnter(i)}
+              onMouseLeave={() => handleSkillLeave(i)}
+              onClick={() => handleSkillClick(i)}
+              style={{ cursor: "pointer", touchAction: "none" }}
             />
           );
         })}
@@ -165,10 +239,14 @@ export const SkillRadar = ({ category, index }: Props) => {
           const LABEL_R = R + 32;
           const pt = polar(angles[i], LABEL_R);
 
-          // Anchor text based on position
           let anchor: "middle" | "start" | "end" = "middle";
           if (pt.x < CX - 10) anchor = "end";
           if (pt.x > CX + 10) anchor = "start";
+
+          const isSelected = clickedSkill === i;
+          const text = isSelected 
+            ? `${skill.name} ${(skill.level * 100).toFixed(0)}%` 
+            : skill.name;
 
           return (
             <text
@@ -179,8 +257,12 @@ export const SkillRadar = ({ category, index }: Props) => {
               textAnchor={anchor}
               dominantBaseline="middle"
               className="sk-radar-text"
+              onMouseEnter={() => handleSkillEnter(i)}
+              onMouseLeave={() => handleSkillLeave(i)}
+              onClick={() => handleSkillClick(i)}
+              style={{ cursor: "pointer", userSelect: "none", fontWeight: isSelected ? "900" : "500" }}
             >
-              {skill.name}
+              {text}
             </text>
           );
         })}

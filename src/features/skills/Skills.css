@@ -168,6 +168,8 @@
   flex-direction: column;
   align-items: center;
   gap: 16px;
+  perspective: 1000px; /* Enable 3D space for the tilt */
+  cursor: crosshair;
 }
 
 .sk-radar-label {
@@ -184,6 +186,8 @@
   max-width: 260px;
   height: auto;
   overflow: visible;
+  transform-style: preserve-3d;
+  will-change: transform;
 }
 
 /* ── SVG internals ── */

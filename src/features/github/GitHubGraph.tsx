@@ -140,6 +140,15 @@ export const GitHubGraph = () => {
           </div>
           <span>More</span>
         </div>
+
+        <a 
+          href="https://github.com/Alg4ret3" 
+          target="_blank" 
+          rel="noopener noreferrer"
+          className="gh-footer-link"
+        >
+          VIEW FULL ACTIVITY ON GITHUB
+        </a>
       </div>
     </section>
   );

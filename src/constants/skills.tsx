@@ -1,8 +1,9 @@
+import React from "react";
 import {
   SiHtml5, SiCss, SiJavascript, SiTypescript,
   SiReact, SiNextdotjs, SiGsap, SiThreedotjs, SiAstro, SiVite,
   SiNodedotjs, SiNestjs, SiFastapi, SiPython,
-  SiGit, SiDocker, SiPostgresql, SiMysql, SiSvelte
+  SiGit, SiDocker, SiPostgresql, SiMysql, SiSvelte, SiVercel, SiFigma
 } from "react-icons/si";
 
 export interface Skill {
@@ -16,8 +17,7 @@ export interface SkillCategory {
   skills: Skill[];
 }
 
-// ── Ticker data ──────────────────────────────────────
-export const skillCategories: SkillCategory[] = [
+export const TICKER_SKILLS: SkillCategory[] = [
   {
     label: "Frontend",
     number: "01",
@@ -50,10 +50,9 @@ export const skillCategories: SkillCategory[] = [
   },
 ];
 
-// ── Radar data ───────────────────────────────────────
 export interface RadarSkill {
   name: string;
-  level: number; // 0 – 1
+  level: number;
 }
 
 export interface RadarCategory {
@@ -61,7 +60,7 @@ export interface RadarCategory {
   skills: RadarSkill[];
 }
 
-export const radarCategories: RadarCategory[] = [
+export const RADAR_SKILLS: RadarCategory[] = [
   {
     label: "Frontend & Animation",
     skills: [
