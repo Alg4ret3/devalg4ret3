@@ -50,8 +50,8 @@ export default function WelcomePage({
     gsap.from(".wp-letter", {
       x: isMobile ? -80 : -150,
       opacity: 0,
-      duration: isMobile ? 0.7 : 1,
-      stagger: isMobile ? 0.06 : 0.1,
+      duration: isMobile ? 1.2 : 1,
+      stagger: isMobile ? 0.12 : 0.1,
       ease: "power3.out",
       force3D: true,
     });
@@ -75,8 +75,8 @@ export default function WelcomePage({
 
       Flip.from(state, {
         absolute: true,
-        stagger: isMobile ? 0.04 : 0.07,
-        duration: isMobile ? 0.5 : 0.7,
+        stagger: isMobile ? 0.08 : 0.07,
+        duration: isMobile ? 0.8 : 0.7,
         ease: "power2.inOut",
         spin: targetLayout === "wp-final" && !isMobile, // No spin on mobile for performance
         simple: true,
@@ -91,7 +91,7 @@ export default function WelcomePage({
              tl.to(".wp-scroll-indicator", {
                opacity: 1,
                y: 0,
-               duration: isMobile ? 0.8 : 1.2,
+               duration: isMobile ? 1.2 : 1.2,
                ease: "power4.out",
                onComplete: () => {
                  ScrollTrigger.refresh();
@@ -103,18 +103,18 @@ export default function WelcomePage({
           gsap.fromTo(
             elements,
             { opacity: 0 },
-            { opacity: 1, duration: isMobile ? 0.3 : 0.5 }
+            { opacity: 1, duration: isMobile ? 0.5 : 0.5 }
           ),
-        onLeave: (elements) => gsap.to(elements, { opacity: 0, duration: isMobile ? 0.3 : 0.5 }),
+        onLeave: (elements) => gsap.to(elements, { opacity: 0, duration: isMobile ? 0.5 : 0.5 }),
       });
 
       if (!(stopAfterNextFinal && targetLayout === "wp-final")) {
-        gsap.delayedCall(isMobile ? 1.1 : 1.5, nextState);
+        gsap.delayedCall(isMobile ? 1.8 : 1.5, nextState);
       }
     }
 
     // Delay the layout sequence to give time for initial entrance
-    gsap.delayedCall(isMobile ? 1.5 : 2.2, nextState);
+    gsap.delayedCall(isMobile ? 2.5 : 2.2, nextState);
   }, { dependencies: [displayName, isMounted], scope: containerRef });
 
   // HOOK 2: Blur and Pinning effect on Scroll
