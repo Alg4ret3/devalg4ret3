@@ -8,65 +8,47 @@ import "./GitHubGraph.css";
 gsap.registerPlugin(ScrollTrigger);
 
 interface Day {
-  count: number;
+  contributionCount: number;
   date: string;
+  contributionLevel: string;
+}
+
+interface GitHubData {
+  contributions: Day[][];
+  totalContributions: number;
 }
 
 export const GitHubGraph = () => {
   const containerRef = useRef<HTMLDivElement>(null);
-  const gridRef = useRef<HTMLDivElement>(null);
-  const [mounted, setMounted] = useState(false);
+  const [data, setData] = useState<GitHubData | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
 
   useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  // Generar datos simulados
-  const data = useMemo(() => {
-    const days: Day[] = [];
-    const now = new Date();
-    now.setHours(0, 0, 0, 0); // Normalizar fecha
-
-    const pseudoRandom = (s: number) => {
-      const x = Math.sin(s) * 10000;
-      return x - Math.floor(x);
+    const fetchGitHubData = async () => {
+      try {
+        const response = await fetch("https://github-contributions-api.deno.dev/Alg4ret3.json");
+        if (!response.ok) throw new Error("Failed to fetch");
+        const json = await response.json();
+        setData(json);
+      } catch (err) {
+        console.error("Error fetching GitHub data:", err);
+        setError(true);
+      } finally {
+        setLoading(false);
+      }
     };
 
-    for (let i = 0; i < 364; i++) {
-      const d = new Date(now);
-      d.setDate(now.getDate() - (363 - i));
-
-      const seed = i + 123;
-      const isWeekend = d.getDay() === 0 || d.getDay() === 6;
-      const rand = pseudoRandom(seed);
-      const hasActivity = rand > 0.2;
-      const count = hasActivity
-        ? Math.floor(pseudoRandom(seed + 1) * (isWeekend ? 3 : 10))
-        : 0;
-
-      days.push({
-        count,
-        date: d.toISOString().split("T")[0],
-      });
-    }
-    return days;
+    fetchGitHubData();
   }, []);
 
-  // Agrupar en semanas
-  const weeks = useMemo(() => {
-    const w = [];
-    for (let i = 0; i < data.length; i += 7) {
-      w.push(data.slice(i, i + 7));
-    }
-    return w;
-  }, [data]);
-
   useEffect(() => {
+    if (loading || !data) return;
+
     const container = containerRef.current;
     if (!container) return;
 
     const ctx = gsap.context(() => {
-      // Animar COLUMNAS en lugar de 364 cuadritos individuales
       gsap.fromTo(
         ".gh-week",
         {
@@ -78,7 +60,7 @@ export const GitHubGraph = () => {
           opacity: 1,
           duration: 0.5,
           ease: "power2.out",
-          stagger: 0.01, // Mucho más ligero
+          stagger: 0.01,
           scrollTrigger: {
             trigger: container,
             start: "top 90%",
@@ -89,14 +71,16 @@ export const GitHubGraph = () => {
     }, container);
 
     return () => ctx.revert();
-  }, []);
+  }, [loading, data]);
 
-  const getLevel = (count: number) => {
-    if (count === 0) return 0;
-    if (count < 3) return 1;
-    if (count < 6) return 2;
-    if (count < 9) return 3;
-    return 4;
+  const getLevel = (level: string) => {
+    switch (level) {
+      case "FIRST_QUARTILE": return 1;
+      case "SECOND_QUARTILE": return 2;
+      case "THIRD_QUARTILE": return 3;
+      case "FOURTH_QUARTILE": return 4;
+      default: return 0;
+    }
   };
 
   return (
@@ -104,29 +88,37 @@ export const GitHubGraph = () => {
       <div className="gh-header">
         <div className="gh-title-group">
           <h3 className="gh-title">Activity</h3>
-          <p className="gh-subtitle">Commit History</p>
+          <p className="gh-subtitle">Real-time GitHub Contributions</p>
         </div>
         <div className="gh-stats">
           <div className="gh-stat-item">
-            <span className="gh-stat-value">2,482</span>
-            <span className="gh-stat-label">Total Commits</span>
+            <span className="gh-stat-value">
+              {loading ? "..." : (data?.totalContributions || 0).toLocaleString()}
+            </span>
+            <span className="gh-stat-label">Total Contributions</span>
           </div>
         </div>
       </div>
 
       <div className="gh-graph-container">
-        <div className="gh-grid" ref={gridRef} style={{ minHeight: "110px" }}>
-          {mounted && weeks.map((week, weekIdx) => (
-            <div key={weekIdx} className="gh-week">
-              {week.map((day, dayIdx) => (
-                <div
-                  key={dayIdx}
-                  className={`gh-square level-${getLevel(day.count)}`}
-                  title={`${day.count} commits on ${day.date}`}
-                />
-              ))}
-            </div>
-          ))}
+        <div className="gh-grid" style={{ minHeight: "110px" }}>
+          {loading ? (
+            <div className="gh-loading">Loading activity data...</div>
+          ) : error ? (
+            <div className="gh-error">Unable to load GitHub data</div>
+          ) : (
+            data?.contributions.map((week, weekIdx) => (
+              <div key={weekIdx} className="gh-week">
+                {week.map((day, dayIdx) => (
+                  <div
+                    key={dayIdx}
+                    className={`gh-square level-${getLevel(day.contributionLevel)}`}
+                    title={`${day.contributionCount} contributions on ${day.date}`}
+                  />
+                ))}
+              </div>
+            ))
+          )}
         </div>
 
         <div className="gh-legend">
