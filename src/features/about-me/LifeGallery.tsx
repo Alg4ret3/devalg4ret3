@@ -11,19 +11,19 @@ if (typeof window !== "undefined") {
 
 const LIFE_IMAGES = [
   {
-    src: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?q=80&w=1000&auto=format&fit=crop",
+    src: "https://res.cloudinary.com/dqky6oqrd/image/upload/f_auto,q_auto/v1779220909/j68heu3pljvle4f0lsln.jpg",
     alt: "Explore",
-    label: "Adventure"
+    label: "CrossFit"
   },
   {
-    src: "https://images.unsplash.com/photo-1493225255756-d9584f8606e9?q=80&w=1000&auto=format&fit=crop",
+    src: "https://res.cloudinary.com/dqky6oqrd/image/upload/f_auto,q_auto/v1779220901/gkysbxmww2a6t28nxuti.jpg",
     alt: "Music",
-    label: "Soul"
+    label: "Travel"
   },
   {
-    src: "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?q=80&w=1000&auto=format&fit=crop",
+    src: "https://res.cloudinary.com/dqky6oqrd/image/upload/f_auto,q_auto/v1779220869/dy8fmb0du0j4td4mqvue.jpg",
     alt: "Coffee",
-    label: "Ritual"
+    label: "Running"
   }
 ];
 
@@ -76,7 +76,9 @@ export const LifeGallery = () => {
                     alt={img.alt}
                     fill
                     className="lg-para-img"
-                    sizes="(max-width: 1024px) 100vw, 50vw"
+                    sizes="(max-width: 1024px) 33vw, 32vw"
+                    quality={75}
+                    loading="lazy"
                   />
                   <div className="lg-para-overlay">
                     <span className="lg-para-label">{img.label}</span>
