@@ -35,7 +35,7 @@ export const PROJECTS_DATA: Project[] = [
   },
   {
     id: "03",
-    title: "VisionTreePasto AI",
+    title: "VisionTree AI",
     category: "Artificial Intelligence",
     description: "AI-powered web platform for tree species identification using images with Detectron2 and FastAPI.",
     tech: ["Python", "Detectron2", "FastAPI", "Next.js", "React", "TypeScript", "Supabase", "PostgreSQL"],
@@ -46,7 +46,7 @@ export const PROJECTS_DATA: Project[] = [
   },
   {
     id: "04",
-    title: "TuplaCore Web",
+    title: "Tupla Core",
     category: "Web Development",
     description: "Main website for TuplaCore, focused on web development and digital solutions.",
     tech: ["Next.js", "React", "TypeScript", "Gmail API"],
@@ -57,7 +57,7 @@ export const PROJECTS_DATA: Project[] = [
   },
   {
     id: "05",
-    title: "FitManage",
+    title: "Fit Manage",
     category: "Web Development",
     description: "Web platform for gym management with membership, routines, and user administration.",
     tech: ["Next.js", "React", "TypeScript", "Prisma", "PostgreSQL"],
@@ -68,7 +68,7 @@ export const PROJECTS_DATA: Project[] = [
   },
   {
     id: "06",
-    title: "FarmaSystem",
+    title: "Farma System",
     category: "Artificial Intelligence",
     description: "Landing page for a pharmacy with an AI-powered virtual assistant using the OpenAI API.",
     tech: ["React", "JavaScript", "Python", "FastAPI", "OpenAI API"],
@@ -79,7 +79,7 @@ export const PROJECTS_DATA: Project[] = [
   },
   {
     id: "07",
-    title: "System Corponariño",
+    title: "System  Corpo",
     category: "Desktop App",
     description: "Corporate system to digitize water concession modules and centralize administrative processes.",
     tech: ["Python", "Qt Designer", "SQLite3"],
