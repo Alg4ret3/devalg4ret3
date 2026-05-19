@@ -13,46 +13,79 @@ export interface Project {
 export const PROJECTS_DATA: Project[] = [
   {
     id: "01",
-    title: "VIRTUAL REALITY",
-    category: "Product Design",
-    description: "Immersive platform developed with React and Three.js for real-time 3D environment visualization.",
-    tech: ["React", "Three.js", "GSAP"],
+    title: "System Inventory",
+    category: "Desktop App",
+    description: "Point of Sale (POS) system designed for retail stores. Includes inventory management, billing control, and real-time reporting.",
+    tech: ["Python", "Qt Designer", "SQL", "SQLite"],
     year: "2024",
-    image: "https://images.unsplash.com/photo-1478416272538-5f7e51dc5400?q=80&w=2000&auto=format&fit=crop",
-    github: "https://github.com",
-    web: "https://example.com"
+    image: "https://res.cloudinary.com/dqky6oqrd/image/upload/f_auto,q_auto/v1779224127/rdcuntzavhmkqdcg19jq.png",
+    github: "https://github.com/Alg4ret3/SystemSystock.git",
+    web: ""
   },
   {
     id: "02",
-    title: "DIGITAL ARCHIVE",
+    title: "Fundación Campaes",
     category: "Web Development",
-    description: "High-performance document management system with intelligent indexing and ultra-fast search.",
-    tech: ["Next.js", "PostgreSQL", "Prisma"],
-    year: "2023",
-    image: "https://images.unsplash.com/photo-1510074377623-8cf13fb86c08?q=80&w=2000&auto=format&fit=crop",
-    github: "https://github.com",
-    web: "https://example.com"
+    description: "Landing page developed for a foundation focused on providing support and resources to vulnerable communities.",
+    tech: ["Vite", "React", "TypeScript", "Tailwind CSS"],
+    year: "2024",
+    image: "https://res.cloudinary.com/dqky6oqrd/image/upload/f_auto,q_auto/v1779224146/fvu0ajaxwhcfghw8bc9c.png",
+    github: "https://github.com/Alg4ret3/FundacionCampaes.git",
+    web: "https://www.funpazyesperanza.org/"
   },
   {
     id: "03",
-    title: "CYBER SECURITY",
-    category: "Full Stack",
-    description: "Security monitoring dashboard with real-time alerts and automated vulnerability analysis.",
-    tech: ["Node.js", "Socket.io", "Docker"],
+    title: "VisionTreePasto AI",
+    category: "Artificial Intelligence",
+    description: "AI-powered web platform for tree species identification using images with Detectron2 and FastAPI.",
+    tech: ["Python", "Detectron2", "FastAPI", "Next.js", "React", "TypeScript", "Supabase", "PostgreSQL"],
     year: "2024",
-    image: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=2000&auto=format&fit=crop",
-    github: "https://github.com",
-    web: "https://example.com"
+    image: "https://res.cloudinary.com/dqky6oqrd/image/upload/f_auto,q_auto/v1779224252/t3j8vnkwv22asbhrd7ci.png",
+    github: "https://github.com/Alg4ret3/VisionTreeSystem.git",
+    web: "https://www.visiontreepasto.com"
   },
   {
     id: "04",
-    title: "SMART HOME",
-    category: "UI/UX Design",
-    description: "Centralized home automation control interface focused on accessibility and minimalist user experience.",
-    tech: ["React Native", "Firebase", "Redux"],
-    year: "2022",
-    image: "https://images.unsplash.com/photo-1558002038-1055907df827?q=80&w=2000&auto=format&fit=crop",
-    github: "https://github.com",
-    web: "https://example.com"
+    title: "TuplaCore Web",
+    category: "Web Development",
+    description: "Main website for TuplaCore, focused on web development and digital solutions.",
+    tech: ["Next.js", "React", "TypeScript", "Gmail API"],
+    year: "2024",
+    image: "https://res.cloudinary.com/dqky6oqrd/image/upload/f_auto,q_auto/v1779224284/dztoxbsvir1du0vztnzq.png",
+    github: "https://github.com/Alg4ret3/TuplaCoreWeb.git",
+    web: "https://tuplacore.vercel.app"
+  },
+  {
+    id: "05",
+    title: "FitManage",
+    category: "Web Development",
+    description: "Web platform for gym management with membership, routines, and user administration.",
+    tech: ["Next.js", "React", "TypeScript", "Prisma", "PostgreSQL"],
+    year: "2024",
+    image: "https://res.cloudinary.com/dqky6oqrd/image/upload/f_auto,q_auto/v1779224407/ymm4mtwoeotaywxuneoj.png",
+    github: "https://github.com/Alg4ret3/FitManage.git",
+    web: "https://powergym-gamma.vercel.app/"
+  },
+  {
+    id: "06",
+    title: "FarmaSystem",
+    category: "Artificial Intelligence",
+    description: "Landing page for a pharmacy with an AI-powered virtual assistant using the OpenAI API.",
+    tech: ["React", "JavaScript", "Python", "FastAPI", "OpenAI API"],
+    year: "2024",
+    image: "https://res.cloudinary.com/dqky6oqrd/image/upload/f_auto,q_auto/v1779224552/ynvnepsgiq2wmyeymyta.png",
+    github: "https://github.com/Alg4ret3/FarmaSystem.git",
+    web: "https://farmasystem-bice.vercel.app/"
+  },
+  {
+    id: "07",
+    title: "System Corponariño",
+    category: "Desktop App",
+    description: "Corporate system to digitize water concession modules and centralize administrative processes.",
+    tech: ["Python", "Qt Designer", "SQLite3"],
+    year: "2023",
+    image: "https://res.cloudinary.com/demo/image/upload/w_1200,h_800,c_fill/sample.jpg",
+    github: "https://github.com/Alg4ret3/CorponarinoSys.git",
+    web: ""
   }
 ];
