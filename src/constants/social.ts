@@ -9,7 +9,7 @@ import {
 export const SOCIAL_LINKS = [
   { 
     id: "linkedin", 
-    href: "https://linkedin.com",
+    href: "https://linkedin.com/in/alg4ret3dev",
     label: "LinkedIn",
     icon: FaLinkedin
   },

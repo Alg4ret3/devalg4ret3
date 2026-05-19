@@ -11,5 +11,5 @@ export const SITE_METADATA = {
   author: "Sergio Muñoz",
   location: "Pasto, CO",
   timezone: "America/Bogota",
-  email: "contact@alg4ret3.dev"
+  email: "mzalexander83@gmail.com"
 };
