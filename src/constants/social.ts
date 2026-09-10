@@ -1,9 +1,7 @@
 import { 
   FaLinkedin, 
   FaGithub, 
-  FaWhatsapp, 
-  FaInstagram, 
-  FaFacebook 
+  FaWhatsapp
 } from "react-icons/fa";
 
 export const SOCIAL_LINKS = [
@@ -21,7 +19,7 @@ export const SOCIAL_LINKS = [
   },
   { 
     id: "whatsapp", 
-    href: "c", 
+    href: "https://wa.me/573170098770", 
     label: "WhatsApp",
     icon: FaWhatsapp
   },

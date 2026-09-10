@@ -27,10 +27,51 @@ export const GitHubGraph = () => {
   useEffect(() => {
     const fetchGitHubData = async () => {
       try {
-        const response = await fetch("https://github-contributions-api.deno.dev/Alg4ret3.json");
+        const response = await fetch("https://github-contributions-api.jogruber.de/v4/Alg4ret3");
         if (!response.ok) throw new Error("Failed to fetch");
         const json = await response.json();
-        setData(json);
+        
+        const weeks: Day[][] = [];
+        let currentWeek: Day[] = [];
+        
+        json.contributions.forEach((day: any) => {
+          const date = new Date(day.date + "T00:00:00");
+          const dayOfWeek = date.getDay();
+          
+          if (currentWeek.length === 0 && dayOfWeek !== 0) {
+            for (let i = 0; i < dayOfWeek; i++) {
+              currentWeek.push({ contributionCount: 0, date: "", contributionLevel: "NONE" });
+            }
+          }
+          
+          let levelString = "NONE";
+          if (day.level === 1) levelString = "FIRST_QUARTILE";
+          else if (day.level === 2) levelString = "SECOND_QUARTILE";
+          else if (day.level === 3) levelString = "THIRD_QUARTILE";
+          else if (day.level === 4) levelString = "FOURTH_QUARTILE";
+
+          currentWeek.push({
+            contributionCount: day.count,
+            date: day.date,
+            contributionLevel: levelString
+          });
+          
+          if (currentWeek.length === 7) {
+            weeks.push(currentWeek);
+            currentWeek = [];
+          }
+        });
+        
+        if (currentWeek.length > 0) {
+          weeks.push(currentWeek);
+        }
+        
+        const totalAllTime = Object.values(json.total).reduce((acc: number, curr: any) => acc + (typeof curr === 'number' ? curr : 0), 0);
+
+        setData({
+          contributions: weeks,
+          totalContributions: totalAllTime
+        });
       } catch (err) {
         console.error("Error fetching GitHub data:", err);
         setError(true);
